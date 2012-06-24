@@ -7,8 +7,8 @@ namespace EmbeddedMelodyPlayer
     {
         public static void Main()
         {
-            Debug.Print(
-                Resources.GetString(Resources.StringResources.String1));
+            var programController = new ProgramController();
+            programController.Start();
         }
 
     }
