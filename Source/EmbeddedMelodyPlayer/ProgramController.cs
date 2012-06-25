@@ -1,25 +1,31 @@
-﻿using EmbeddedMelodyPlayer.Playing;
+﻿using EmbeddedMelodyPlayer.Commands;
+using EmbeddedMelodyPlayer.Infrastructure;
+using EmbeddedMelodyPlayer.Playing;
 using EmbeddedMelodyPlayer.Reading;
 
 namespace EmbeddedMelodyPlayer
 {
     public class ProgramController
     {
-        private readonly SdFileReader _sdFileReader;
-        private readonly MelodyCostructorProvider _melodyCostructorProvider;
-
-        public ProgramController()
-        {
-            _sdFileReader = new SdFileReader();
-            _melodyCostructorProvider = new MelodyCostructorProvider();
-        }
-
         public void Start()
         {
-            byte[] melodyData = _sdFileReader.ReadFile("melody.me");
-            IMelodyConstructor melodyConstructor = _melodyCostructorProvider.GetMelodyConstructor();
-            Melody melody = melodyConstructor.CreateMelodyFromBytes(melodyData);
-            string melodyString = melody.ToString();
+            var currentContext = new CurrentContext();
+            ReadMelodyData(currentContext);
+            ConstructMelody(currentContext);
+
+            string melodyString = currentContext.Melody.ToString();
+        }
+
+        private static void ReadMelodyData(CurrentContext currentContext)
+        {
+            ICommand readMelodyData = new ReadMelodyData(currentContext);
+            CommandInvoker.InvokeCommand(readMelodyData);
+        }
+
+        private static void ConstructMelody(CurrentContext currentContext)
+        {
+            var constructMelody = new ConstructMelody(currentContext);
+            CommandInvoker.InvokeCommand(constructMelody);
         }
     }
 }

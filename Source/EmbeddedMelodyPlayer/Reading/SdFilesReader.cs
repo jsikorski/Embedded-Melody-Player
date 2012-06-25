@@ -1,16 +1,17 @@
 ﻿using System;
 using System.IO;
+using System.Threading;
 using GHIElectronics.NETMF.IO;
 using Microsoft.SPOT.IO;
 
 namespace EmbeddedMelodyPlayer.Reading
 {
-    public class SdFileReader
+    public class SdFilesReader
     {
         public byte[] ReadFile(string fileName)
         {
             byte[] fileData;
-            
+
             using (var sdStorage = new PersistentStorage("SD"))
             {
                 sdStorage.MountFileSystem();
@@ -18,6 +19,7 @@ namespace EmbeddedMelodyPlayer.Reading
                 var fullFilePath = GetFullFilePath(fileName);
                 fileData = File.ReadAllBytes(fullFilePath);
 
+                Thread.Sleep(500);
                 sdStorage.UnmountFileSystem();
             }
 
@@ -27,7 +29,7 @@ namespace EmbeddedMelodyPlayer.Reading
         private static string GetFullFilePath(string fileName)
         {
             string rootDirectoryPath = VolumeInfo.GetVolumes()[0].RootDirectory;
-            string fullFilePath = rootDirectoryPath + "\\" + fileName;
+            string fullFilePath = rootDirectoryPath + @"\" + fileName;
             return fullFilePath;
         }
     }

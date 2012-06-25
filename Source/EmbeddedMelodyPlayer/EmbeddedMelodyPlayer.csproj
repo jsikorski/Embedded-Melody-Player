@@ -30,7 +30,10 @@
   </PropertyGroup>
   <Import Project="$(NetMfTargetsBaseDir)$(TargetFrameworkVersion)\CSharp.Targets" />
   <ItemGroup>
+    <Compile Include="Commands\ConstructMelody.cs" />
     <Compile Include="Commands\ICommand.cs" />
+    <Compile Include="Commands\ReadMelodyData.cs" />
+    <Compile Include="CurrentContext.cs" />
     <Compile Include="Infrastructure\CommandInvoker.cs" />
     <Compile Include="Playing\Melody.cs" />
     <Compile Include="Playing\MelodyElement.cs" />
@@ -40,7 +43,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Reading\MelodyCostructorProvider.cs" />
-    <Compile Include="Reading\SdFileReader.cs" />
+    <Compile Include="Reading\SdFilesReader.cs" />
     <Compile Include="Reading\IMelodyConstructor.cs" />
     <Compile Include="Reading\MeMelodyConstructor.cs" />
     <Compile Include="Reading\MidiMelodyConstructor.cs" />

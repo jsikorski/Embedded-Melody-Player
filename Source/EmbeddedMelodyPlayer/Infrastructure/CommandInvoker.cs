@@ -5,7 +5,7 @@ namespace EmbeddedMelodyPlayer.Infrastructure
 {
     public class CommandInvoker
     {
-        public void InvokeCommand(ICommand command)
+        public static void InvokeCommand(ICommand command)
         {
             try
             {
