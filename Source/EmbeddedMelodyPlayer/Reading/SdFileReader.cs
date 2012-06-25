@@ -9,20 +9,25 @@ namespace EmbeddedMelodyPlayer.Reading
     {
         public byte[] ReadFile(string fileName)
         {
-            var sdStorage = new PersistentStorage("SD");
-            sdStorage.MountFileSystem();
+            byte[] fileData;
+            
+            using (var sdStorage = new PersistentStorage("SD"))
+            {
+                sdStorage.MountFileSystem();
 
-            var fullFilePath = GetFullFilePath(fileName);
-            byte[] fileData = File.ReadAllBytes(fullFilePath);
+                var fullFilePath = GetFullFilePath(fileName);
+                fileData = File.ReadAllBytes(fullFilePath);
 
-            sdStorage.UnmountFileSystem();
+                sdStorage.UnmountFileSystem();
+            }
+
             return fileData;
         }
 
         private static string GetFullFilePath(string fileName)
         {
             string rootDirectoryPath = VolumeInfo.GetVolumes()[0].RootDirectory;
-            string fullFilePath = rootDirectoryPath + fileName;
+            string fullFilePath = rootDirectoryPath + "\\" + fileName;
             return fullFilePath;
         }
     }

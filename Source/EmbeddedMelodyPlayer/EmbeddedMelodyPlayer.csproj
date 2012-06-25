@@ -39,6 +39,7 @@
     <Compile Include="ProgramController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="Reading\MelodyCostructorProvider.cs" />
     <Compile Include="Reading\SdFileReader.cs" />
     <Compile Include="Reading\IMelodyConstructor.cs" />
     <Compile Include="Reading\MeMelodyConstructor.cs" />
