@@ -1,46 +1,44 @@
 ﻿using System;
-using System.Collections;
-using System.Linq;
 using System.Text;
 using EmbeddedMelodyPlayer.Playing;
 
 namespace EmbeddedMelodyPlayer.Reading
 {
-    public class MeMelodyConstructor : MelodyConstructorBase, IMelodyConstructor
+    public class MeMelodyConstructor : IMelodyConstructor
     {
-        private const string FileName = "melody.me";
-
-        public Melody CreateMelodyFromFile()
+        public Melody CreateMelodyFromBytes(byte[] melodyData)
         {
-            var melodyString = GetMelodyString();
-            IEnumerable melodyElements = GetMelodyElementsFromString(melodyString);
+            MelodyElement[] melodyElements;
+            try
+            {
+                var melodyString = GetMelodyString(melodyData);
+                melodyElements = GetMelodyElementsFromString(melodyString);
+            }
+            catch
+            {
+                throw new ArgumentException("Melody data are invalid.");
+            }
+            
             return new Melody(melodyElements);
         }
 
-        private string GetMelodyString()
+        private string GetMelodyString(byte[] melodyData)
         {
-            byte[] fileData = FileReader.ReadFileFromSD(FileName);
-            var melodyString = new string(Encoding.UTF8.GetChars(fileData));
+            var melodyString = new string(Encoding.UTF8.GetChars(melodyData));
             return melodyString;
         }
 
-        private IEnumerable GetMelodyElementsFromString(string melodyString)
+        private MelodyElement[] GetMelodyElementsFromString(string melodyString)
         {
             string[] melodyElementsStrings = melodyString.Split(' ');
-            return melodyElementsStrings.Select(GetMelodyElementFromString);
+            
+            var melodyElements = new MelodyElement[melodyElementsStrings.Length];
+            for (int i = 0; i < melodyElementsStrings.Length; i++)
+            {
+                melodyElements[i] = MelodyElement.Parse(melodyElementsStrings[i].Trim());
+            }
+
+            return melodyElements;
         }
-
-        private IMelodyElement GetMelodyElementFromString(string melodyElementString)
-        {
-            char melodyElementSymbol = melodyElementString[0];
-            string melodyElementDurationString = melodyElementString.Substring(1);
-            int melodyElementDuration = Convert.ToInt32(melodyElementDurationString.Trim('[', ']'));
-
-            if (melodyElementSymbol == 'P')
-                return new Pause(melodyElementDuration);
-
-            return new Note(melodyElementSymbol, melodyElementDuration);
-        }
-
     }
 }

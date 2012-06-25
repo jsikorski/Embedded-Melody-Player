@@ -1,17 +1,13 @@
 ﻿namespace EmbeddedMelodyPlayer.Playing
 {
-    public class Pause : IMelodyElement
+    public class Pause : MelodyElement
     {
-        public char Symbol
-        {
-            get { return 'P'; }
-        }
-
-        public int Duration { get; private set; }
-
         public Pause(int duration)
         {
-            Duration = duration;
+           CheckInputData('P', duration);
+
+            Symbol = 'P';
+           Duration = duration;
         }
     }
 }

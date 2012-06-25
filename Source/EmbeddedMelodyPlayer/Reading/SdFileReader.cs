@@ -5,9 +5,9 @@ using Microsoft.SPOT.IO;
 
 namespace EmbeddedMelodyPlayer.Reading
 {
-    public class FileReader
+    public class SdFileReader
     {
-        public byte[] ReadFileFromSD(string fileName)
+        public byte[] ReadFile(string fileName)
         {
             var sdStorage = new PersistentStorage("SD");
             sdStorage.MountFileSystem();

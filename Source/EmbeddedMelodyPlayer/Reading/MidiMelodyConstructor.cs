@@ -2,9 +2,9 @@
 
 namespace EmbeddedMelodyPlayer.Reading
 {
-    public class MidiMelodyConstructor : MelodyConstructorBase, IMelodyConstructor
+    public class MidiMelodyConstructor : IMelodyConstructor
     {
-        public Melody CreateMelodyFromFile()
+        public Melody CreateMelodyFromBytes(byte[] melodyData)
         {
             throw new System.NotImplementedException();
         }

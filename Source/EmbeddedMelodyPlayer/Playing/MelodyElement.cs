@@ -1,20 +1,55 @@
-﻿namespace EmbeddedMelodyPlayer.Playing
+﻿using System;
+using VikingErik.NetMF.MicroLinq;
+
+namespace EmbeddedMelodyPlayer.Playing
 {
-    public class MelodyElement : IMelodyElement
+    public abstract class MelodyElement
     {
-        public static void Parse(string melodyElementString)
+        private static readonly char[] AllowedMelodyElementsSymbols = new[] {'C', 'D', 'E', 'F', 'G', 'A', 'H', 'P'};
+        private static readonly int[] AllowedDurations = new[] {1, 2, 4, 8};
+
+        // Public for testing purposes
+        public char Symbol { get; protected set; }
+        public int Duration { get; protected set; }
+
+        public static MelodyElement Parse(string melodyElementString)
         {
-            
+            CheckMelodyElementString(melodyElementString);
+
+            char melodyElementSymbol = melodyElementString[0];
+            string melodyElementDurationString = melodyElementString.Substring(1);
+            int melodyElementDuration = Convert.ToInt32(melodyElementDurationString.Trim('[', ']'));
+
+            if (melodyElementSymbol == 'P')
+                return new Pause(melodyElementDuration);
+
+            return new Note(melodyElementSymbol, melodyElementDuration);
         }
 
-        public char Symbol
+        private static void CheckMelodyElementString(string melodyElementString)
         {
-            get { throw new System.NotImplementedException(); }
+            if (melodyElementString.Length != 4 ||
+                !AllowedMelodyElementsSymbols.Contains(Convert.ToChar(melodyElementString[0])) ||
+                melodyElementString[1] != '[' ||
+                !AllowedDurations.Contains(Convert.ToInt32(melodyElementString[2].ToString())) ||
+                melodyElementString[3] != ']')
+            {
+                throw new ArgumentException("Melody element string is invalid.");
+            }
         }
 
-        public int Duration
+        public override string ToString()
         {
-            get { throw new System.NotImplementedException(); }
+            return Symbol + "[" + Duration + "]";
+        }
+
+        protected void CheckInputData(char symbol, int duration)
+        {
+            if (!AllowedMelodyElementsSymbols.Contains(symbol) ||
+                !AllowedDurations.Contains(duration))
+            {
+                throw new ArgumentException("Melody element parameters are invalid.");
+            }
         }
     }
 }

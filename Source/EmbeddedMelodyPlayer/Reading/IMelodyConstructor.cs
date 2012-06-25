@@ -4,6 +4,6 @@ namespace EmbeddedMelodyPlayer.Reading
 {
     public interface IMelodyConstructor
     {
-        Melody CreateMelodyFromFile();
+        Melody CreateMelodyFromBytes(byte[] melodyData);
     }
 }

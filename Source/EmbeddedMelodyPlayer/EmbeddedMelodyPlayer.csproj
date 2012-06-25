@@ -32,16 +32,15 @@
   <ItemGroup>
     <Compile Include="Commands\ICommand.cs" />
     <Compile Include="Infrastructure\CommandInvoker.cs" />
-    <Compile Include="Playing\IMelodyElement.cs" />
     <Compile Include="Playing\Melody.cs" />
+    <Compile Include="Playing\MelodyElement.cs" />
     <Compile Include="Playing\Note.cs" />
     <Compile Include="Playing\Pause.cs" />
     <Compile Include="ProgramController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="Reading\FileReader.cs" />
+    <Compile Include="Reading\SdFileReader.cs" />
     <Compile Include="Reading\IMelodyConstructor.cs" />
-    <Compile Include="Reading\MelodyConstructorBase.cs" />
     <Compile Include="Reading\MeMelodyConstructor.cs" />
     <Compile Include="Reading\MidiMelodyConstructor.cs" />
     <Compile Include="Resources.Designer.cs">
@@ -59,6 +58,9 @@
     <Reference Include="Microsoft.SPOT.Native">
     </Reference>
     <Reference Include="System.IO" />
+    <Reference Include="VikingErik.NetMF.MicroLinq">
+      <HintPath>..\Libraries\VikingErik.NetMF.MicroLinq\VikingErik.NetMF.MicroLinq.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources.resx">
