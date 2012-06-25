@@ -1,4 +1,6 @@
 ﻿using System;
+using GHIElectronics.NETMF.FEZ;
+using GHIElectronics.NETMF.Hardware;
 using VikingErik.NetMF.MicroLinq;
 
 namespace EmbeddedMelodyPlayer.Playing
@@ -43,7 +45,7 @@ namespace EmbeddedMelodyPlayer.Playing
             return Symbol + "[" + Duration + "]";
         }
 
-        protected void CheckInputData(char symbol, int duration)
+        protected void CheckElementParameters(char symbol, int duration)
         {
             if (!AllowedMelodyElementsSymbols.Contains(symbol) ||
                 !AllowedDurations.Contains(duration))
@@ -51,5 +53,7 @@ namespace EmbeddedMelodyPlayer.Playing
                 throw new ArgumentException("Melody element parameters are invalid.");
             }
         }
+
+        public abstract void Play(PWM output);
     }
 }

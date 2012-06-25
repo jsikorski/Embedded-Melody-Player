@@ -2,6 +2,9 @@
 using EmbeddedMelodyPlayer.Infrastructure;
 using EmbeddedMelodyPlayer.Playing;
 using EmbeddedMelodyPlayer.Reading;
+using GHIElectronics.NETMF.FEZ;
+using GHIElectronics.NETMF.Hardware;
+using Microsoft.SPOT.Hardware;
 
 namespace EmbeddedMelodyPlayer
 {
@@ -12,8 +15,7 @@ namespace EmbeddedMelodyPlayer
             var currentContext = new CurrentContext();
             ReadMelodyData(currentContext);
             ConstructMelody(currentContext);
-
-            string melodyString = currentContext.Melody.ToString();
+            PlayMelody(currentContext);
         }
 
         private static void ReadMelodyData(CurrentContext currentContext)
@@ -24,8 +26,14 @@ namespace EmbeddedMelodyPlayer
 
         private static void ConstructMelody(CurrentContext currentContext)
         {
-            var constructMelody = new ConstructMelody(currentContext);
+            ICommand constructMelody = new ConstructMelody(currentContext);
             CommandInvoker.InvokeCommand(constructMelody);
+        }
+
+        private static void PlayMelody(CurrentContext currentContext)
+        {
+            ICommand playMelody = new PlayMelody(currentContext);
+            CommandInvoker.InvokeCommand(playMelody);
         }
     }
 }
