@@ -50,12 +50,38 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\EmbeddedMelodyPlayer\Playing\Melody.cs">
+      <Link>References\Playing\Melody.cs</Link>
+    </Compile>
+    <Compile Include="..\EmbeddedMelodyPlayer\Playing\MelodyElement.cs">
+      <Link>References\Playing\MelodyElement.cs</Link>
+    </Compile>
+    <Compile Include="..\EmbeddedMelodyPlayer\Playing\Note.cs">
+      <Link>References\Playing\Note.cs</Link>
+    </Compile>
+    <Compile Include="..\EmbeddedMelodyPlayer\Playing\Pause.cs">
+      <Link>References\Playing\Pause.cs</Link>
+    </Compile>
+    <Compile Include="..\EmbeddedMelodyPlayer\Reading\IMelodyConstructor.cs">
+      <Link>References\Reading\IMelodyConstructor.cs</Link>
+    </Compile>
+    <Compile Include="..\EmbeddedMelodyPlayer\Reading\MelodyCostructorProvider.cs">
+      <Link>References\Reading\MelodyCostructorProvider.cs</Link>
+    </Compile>
+    <Compile Include="..\EmbeddedMelodyPlayer\Reading\MeMelodyConstructor.cs">
+      <Link>References\Reading\MeMelodyConstructor.cs</Link>
+    </Compile>
+    <Compile Include="..\EmbeddedMelodyPlayer\Reading\MidiMelodyConstructor.cs">
+      <Link>References\Reading\MidiMelodyConstructor.cs</Link>
+    </Compile>
     <Compile Include="Playing\MelodyElementTests.cs" />
     <Compile Include="Playing\MelodyTests.cs" />
     <Compile Include="Playing\NoteTests.cs" />
     <Compile Include="Playing\PauseTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reading\MeMelodyConstructorTests.cs" />
+    <Compile Include="References\MocksModels.cs" />
+    <Compile Include="References\Supplements.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -65,12 +91,6 @@
     <None Include="Resources\sample_correct_melody.me">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\EmbeddedMelodyPlayer\EmbeddedMelodyPlayer.csproj">
-      <Project>{4DC3A7C8-03E6-4723-B1C0-C5852B189170}</Project>
-      <Name>EmbeddedMelodyPlayer</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

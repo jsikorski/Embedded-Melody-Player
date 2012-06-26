@@ -1,5 +1,4 @@
-﻿
-using System.Collections;
+﻿using System.Collections;
 using GHIElectronics.NETMF.Hardware;
 using VikingErik.NetMF.MicroLinq;
 

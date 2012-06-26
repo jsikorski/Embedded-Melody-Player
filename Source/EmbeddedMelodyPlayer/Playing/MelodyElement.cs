@@ -1,5 +1,4 @@
 ﻿using System;
-using GHIElectronics.NETMF.FEZ;
 using GHIElectronics.NETMF.Hardware;
 using VikingErik.NetMF.MicroLinq;
 
