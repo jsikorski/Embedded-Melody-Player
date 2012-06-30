@@ -1,39 +1,35 @@
-﻿using EmbeddedMelodyPlayer.Commands;
+﻿using System.Threading;
+using EmbeddedMelodyPlayer.Commands;
 using EmbeddedMelodyPlayer.Infrastructure;
-using EmbeddedMelodyPlayer.Playing;
-using EmbeddedMelodyPlayer.Reading;
-using GHIElectronics.NETMF.FEZ;
-using GHIElectronics.NETMF.Hardware;
-using Microsoft.SPOT.Hardware;
+using GHIElectronics.NETMF.IO;
+using Microsoft.SPOT;
+using Microsoft.SPOT.IO;
 
 namespace EmbeddedMelodyPlayer
 {
     public class ProgramController
     {
+        private CurrentContext _currentContext;
+
         public void Start()
         {
-            var currentContext = new CurrentContext();
-            ReadMelodyData(currentContext);
-            ConstructMelody(currentContext);
-            PlayMelody(currentContext);
+            Debug.Print("Program is starting...");
+            _currentContext = new CurrentContext();
+
+            ICommand startSdDetection = new StartSdDetection(TryPlay, _currentContext);
+            CommandsInvoker.ExecuteCommand(startSdDetection);
         }
 
-        private static void ReadMelodyData(CurrentContext currentContext)
+        private void TryPlay()
         {
-            ICommand readMelodyData = new ReadMelodyData(currentContext);
-            CommandInvoker.InvokeCommand(readMelodyData);
-        }
+            var playingPipe = new CommandsPipe(new ICommand[]
+                                                   {
+                                                       new ReadMelodyData(_currentContext),
+                                                       new ConstructMelody(_currentContext),
+                                                       new PlayMelody(_currentContext)
+                                                   });
 
-        private static void ConstructMelody(CurrentContext currentContext)
-        {
-            ICommand constructMelody = new ConstructMelody(currentContext);
-            CommandInvoker.InvokeCommand(constructMelody);
-        }
-
-        private static void PlayMelody(CurrentContext currentContext)
-        {
-            ICommand playMelody = new PlayMelody(currentContext);
-            CommandInvoker.InvokeCommand(playMelody);
+            CommandsInvoker.ExecuteCommand(playingPipe);
         }
     }
 }

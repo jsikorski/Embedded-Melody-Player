@@ -1,5 +1,6 @@
-﻿using EmbeddedMelodyPlayer.Playing;
+using EmbeddedMelodyPlayer.Infrastructure;
 using EmbeddedMelodyPlayer.Reading;
+using Microsoft.SPOT;
 
 namespace EmbeddedMelodyPlayer.Commands
 {
@@ -16,6 +17,8 @@ namespace EmbeddedMelodyPlayer.Commands
 
         public void Execute()
         {
+            Debug.Print("Constructing melody...");
+
             IMelodyConstructor melodyConstructor = _melodyCostructorProvider.GetMelodyConstructor();
             _currentContext.Melody = melodyConstructor.CreateMelodyFromBytes(_currentContext.MelodyData);
         }

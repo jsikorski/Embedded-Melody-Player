@@ -1,4 +1,4 @@
-﻿namespace EmbeddedMelodyPlayer.Commands
+namespace EmbeddedMelodyPlayer.Infrastructure
 {
     public interface ICommand
     {

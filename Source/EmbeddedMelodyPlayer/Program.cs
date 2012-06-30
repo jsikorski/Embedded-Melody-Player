@@ -1,5 +1,11 @@
 ﻿using System;
+using System.Threading;
+using EmbeddedMelodyPlayer.Utils;
+using GHIElectronics.NETMF.FEZ;
+using GHIElectronics.NETMF.IO;
 using Microsoft.SPOT;
+using Microsoft.SPOT.Hardware;
+using Microsoft.SPOT.IO;
 
 namespace EmbeddedMelodyPlayer
 {
@@ -9,7 +15,9 @@ namespace EmbeddedMelodyPlayer
         {
             var programController = new ProgramController();
             programController.Start();
-        }
 
+            Debug.Print("Program started and ready.");
+            Thread.Sleep(Timeout.Infinite);
+        }
     }
 }

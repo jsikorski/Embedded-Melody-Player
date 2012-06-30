@@ -31,11 +31,13 @@
   <Import Project="$(NetMfTargetsBaseDir)$(TargetFrameworkVersion)\CSharp.Targets" />
   <ItemGroup>
     <Compile Include="Commands\ConstructMelody.cs" />
-    <Compile Include="Commands\ICommand.cs" />
     <Compile Include="Commands\PlayMelody.cs" />
     <Compile Include="Commands\ReadMelodyData.cs" />
+    <Compile Include="Commands\StartSdDetection.cs" />
     <Compile Include="CurrentContext.cs" />
-    <Compile Include="Infrastructure\CommandInvoker.cs" />
+    <Compile Include="Infrastructure\CommandsInvoker.cs" />
+    <Compile Include="Infrastructure\CommandsPipe.cs" />
+    <Compile Include="Infrastructure\ICommand.cs" />
     <Compile Include="Playing\Melody.cs" />
     <Compile Include="Playing\MelodyElement.cs" />
     <Compile Include="Playing\Note.cs" />
@@ -53,6 +55,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Utils\Action.cs" />
+    <Compile Include="Utils\SeparateThreadTimer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="FEZDomino_GHIElectronics.NETMF.FEZ, Version=4.1.8.0, Culture=neutral, processorArchitecture=MSIL" />
@@ -76,4 +80,5 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
 </Project>
