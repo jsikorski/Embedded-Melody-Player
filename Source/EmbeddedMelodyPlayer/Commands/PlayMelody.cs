@@ -1,28 +1,41 @@
 using System.Threading;
+using EmbeddedMelodyPlayer.Core;
 using EmbeddedMelodyPlayer.Infrastructure;
-using GHIElectronics.NETMF.FEZ;
-using GHIElectronics.NETMF.Hardware;
+using EmbeddedMelodyPlayer.Pins;
+using EmbeddedMelodyPlayer.Playing;
 using Microsoft.SPOT;
 
 namespace EmbeddedMelodyPlayer.Commands
 {
     public class PlayMelody : ICommand
     {
-        private static readonly PWM Pwm = new PWM((PWM.Pin) FEZ_Pin.PWM.Di5);
-        private readonly CurrentContext _currentContext;
+        private readonly ProgramState _programState;
+        private readonly PlayingContext _playingContext;
 
-        public PlayMelody(CurrentContext currentContext)
+        public PlayMelody(ProgramState programState, PlayingContext playingContext)
         {
-            _currentContext = currentContext;
+            _programState = programState;
+            _playingContext = playingContext;
         }
 
         public void Execute()
         {
-            Debug.Print("Playing melody...");
-            
-            _currentContext.IsPlaying = true;
-            _currentContext.Melody.Play(Pwm);
-            _currentContext.IsPlaying = false;
+            var playingThread = new Thread(Play);
+
+            Debug.GC(true);
+            _playingContext.CanPlay.WaitOne();
+
+            //Debug.Print("Playing melody...");
+            playingThread.Start();
+        }
+
+        private void Play()
+        {
+            _programState.IsPlaying = true;
+            _playingContext.MelodyFrament.Play(Outputs.BuzzerPwm);
+            _programState.IsPlaying = false;
+
+            _playingContext.CanPlay.Set();
         }
     }
 }

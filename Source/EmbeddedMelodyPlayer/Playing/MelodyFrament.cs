@@ -4,11 +4,11 @@ using VikingErik.NetMF.MicroLinq;
 
 namespace EmbeddedMelodyPlayer.Playing
 {
-    public class Melody
+    public class MelodyFrament
     {
         private readonly MelodyElement[] _melodyElements;
 
-        public Melody(MelodyElement[] melodyElements)
+        public MelodyFrament(MelodyElement[] melodyElements)
         {
             _melodyElements = melodyElements;
         }

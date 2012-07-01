@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Threading;
+using EmbeddedMelodyPlayer.Core;
+using EmbeddedMelodyPlayer.Pins;
 using EmbeddedMelodyPlayer.Utils;
 using GHIElectronics.NETMF.FEZ;
 using GHIElectronics.NETMF.IO;

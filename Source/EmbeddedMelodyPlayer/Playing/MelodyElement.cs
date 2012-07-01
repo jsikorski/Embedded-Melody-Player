@@ -35,7 +35,7 @@ namespace EmbeddedMelodyPlayer.Playing
                 !AllowedDurations.Contains(Convert.ToInt32(melodyElementString[2].ToString())) ||
                 melodyElementString[3] != ']')
             {
-                throw new ArgumentException("Melody element string is invalid.");
+                throw new ArgumentException("MelodyFrament element string is invalid.");
             }
         }
 
@@ -49,7 +49,7 @@ namespace EmbeddedMelodyPlayer.Playing
             if (!AllowedMelodyElementsSymbols.Contains(symbol) ||
                 !AllowedDurations.Contains(duration))
             {
-                throw new ArgumentException("Melody element parameters are invalid.");
+                throw new ArgumentException("MelodyFrament element parameters are invalid.");
             }
         }
 

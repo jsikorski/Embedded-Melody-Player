@@ -50,6 +50,9 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\EmbeddedMelodyPlayer\Pins\Outputs.cs">
+      <Link>References\Pins\Outputs.cs</Link>
+    </Compile>
     <Compile Include="..\EmbeddedMelodyPlayer\Playing\Melody.cs">
       <Link>References\Playing\Melody.cs</Link>
     </Compile>

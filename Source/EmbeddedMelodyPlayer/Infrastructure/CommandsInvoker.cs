@@ -1,4 +1,5 @@
 ﻿using System;
+using EmbeddedMelodyPlayer.Utils;
 using Microsoft.SPOT;
 
 namespace EmbeddedMelodyPlayer.Infrastructure
@@ -10,10 +11,11 @@ namespace EmbeddedMelodyPlayer.Infrastructure
             try
             {
                 command.Execute();
+                Debug.GC(true);
             }
             catch (Exception exception)
             {
-                Debug.Print("Exception: " + exception.Message);
+                DebugHelper.PrintCommandExceptionMessage(exception, command);
             }
         }
     }

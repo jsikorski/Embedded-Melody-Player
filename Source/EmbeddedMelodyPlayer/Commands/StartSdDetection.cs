@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading;
+using EmbeddedMelodyPlayer.Core;
 using EmbeddedMelodyPlayer.Infrastructure;
 using EmbeddedMelodyPlayer.Utils;
 using GHIElectronics.NETMF.IO;
@@ -13,16 +14,16 @@ namespace EmbeddedMelodyPlayer.Commands
         private const int SdDetectionTimerInterval = 500;
 
         private readonly Action _onSdCardDetected;
-        private readonly CurrentContext _currentContext;
+        private readonly ProgramState _programState;
         private readonly SeparateThreadTimer _sdDetectionTimer;
 
         private PersistentStorage _sdStorage;
         private Thread _onDetectActionThread;
 
-        public StartSdDetection(Action onSdCardDetected, CurrentContext currentContext)
+        public StartSdDetection(Action onSdCardDetected, ProgramState programState)
         {
             _onSdCardDetected = onSdCardDetected;
-            _currentContext = currentContext;
+            _programState = programState;
             _sdDetectionTimer = new SeparateThreadTimer(DetectSdCard, SdDetectionTimerInterval);
         }
 
@@ -32,7 +33,7 @@ namespace EmbeddedMelodyPlayer.Commands
             {
                 bool isSdCardDetected = IsSdCardDetected();
 
-                if (!_currentContext.IsPlaying && isSdCardDetected && _sdStorage == null)
+                if (!_programState.IsPlaying && isSdCardDetected && _sdStorage == null)
                 {
                     Debug.Print("Sd card detected.");
                     InitializeSdStorage();
@@ -89,11 +90,11 @@ namespace EmbeddedMelodyPlayer.Commands
         {
             Debug.Print("Starting sd detection...");
 
-            BindSdCardEvents();
+            BindSdCardEventsHandlers();
             _sdDetectionTimer.Start();
         }
 
-        private void BindSdCardEvents()
+        private void BindSdCardEventsHandlers()
         {
             RemovableMedia.Insert += RemovableMediaOnInsert;
             RemovableMedia.Eject += RemovableMediaOnEject;
@@ -102,7 +103,7 @@ namespace EmbeddedMelodyPlayer.Commands
         private void RemovableMediaOnInsert(object sender, MediaEventArgs mediaEventArgs)
         {
             Debug.Print("Sd card file system mounted.");
-            _currentContext.SdCardVolume = mediaEventArgs.Volume;
+            _programState.SdCardVolume = mediaEventArgs.Volume;
 
             _onDetectActionThread = new Thread(() => _onSdCardDetected());
             _onDetectActionThread.Start();
@@ -111,6 +112,7 @@ namespace EmbeddedMelodyPlayer.Commands
         private void RemovableMediaOnEject(object sender, MediaEventArgs mediaEventArgs)
         {
             Debug.Print("Sd card file system unmounted.");
+            _programState.SdCardVolume = null;
         }
     }
 }

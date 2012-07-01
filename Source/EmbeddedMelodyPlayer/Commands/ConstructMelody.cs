@@ -1,4 +1,6 @@
+using EmbeddedMelodyPlayer.Core;
 using EmbeddedMelodyPlayer.Infrastructure;
+using EmbeddedMelodyPlayer.Playing;
 using EmbeddedMelodyPlayer.Reading;
 using Microsoft.SPOT;
 
@@ -6,12 +8,12 @@ namespace EmbeddedMelodyPlayer.Commands
 {
     public class ConstructMelody : ICommand
     {
-        private readonly CurrentContext _currentContext;
+        private readonly PlayingContext _playingContext;
         private readonly MelodyCostructorProvider _melodyCostructorProvider;
 
-        public ConstructMelody(CurrentContext currentContext)
+        public ConstructMelody(PlayingContext playingContext)
         {
-            _currentContext = currentContext;
+            _playingContext = playingContext;
             _melodyCostructorProvider = new MelodyCostructorProvider();
         }
 
@@ -20,7 +22,7 @@ namespace EmbeddedMelodyPlayer.Commands
             Debug.Print("Constructing melody...");
 
             IMelodyConstructor melodyConstructor = _melodyCostructorProvider.GetMelodyConstructor();
-            _currentContext.Melody = melodyConstructor.CreateMelodyFromBytes(_currentContext.MelodyData);
+            _playingContext.MelodyFrament = melodyConstructor.CreateMelodyFromBytes(_playingContext.MelodyFileChunkData);
         }
     }
 }
