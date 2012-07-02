@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading;
+﻿using System.Threading;
 using EmbeddedMelodyPlayer.Core;
 using EmbeddedMelodyPlayer.Infrastructure;
 using EmbeddedMelodyPlayer.Utils;
@@ -17,8 +16,8 @@ namespace EmbeddedMelodyPlayer.Commands
         private readonly ProgramState _programState;
         private readonly SeparateThreadTimer _sdDetectionTimer;
 
-        private PersistentStorage _sdStorage;
         private Thread _onDetectActionThread;
+        private PersistentStorage _sdStorage;
 
         public StartSdDetection(Action onSdCardDetected, ProgramState programState)
         {
@@ -27,13 +26,25 @@ namespace EmbeddedMelodyPlayer.Commands
             _sdDetectionTimer = new SeparateThreadTimer(DetectSdCard, SdDetectionTimerInterval);
         }
 
+        #region ICommand Members
+
+        public void Execute()
+        {
+            Debug.Print("Starting sd detection...");
+
+            BindSdCardEventsHandlers();
+            _sdDetectionTimer.Start();
+        }
+
+        #endregion
+
         private void DetectSdCard()
         {
             try
             {
                 bool isSdCardDetected = IsSdCardDetected();
 
-                if (!_programState.IsPlaying && isSdCardDetected && _sdStorage == null)
+                if (!_programState.BusyScope.IsBusy && isSdCardDetected && _sdStorage == null)
                 {
                     Debug.Print("Sd card detected.");
                     InitializeSdStorage();
@@ -84,14 +95,6 @@ namespace EmbeddedMelodyPlayer.Commands
 
             _sdStorage.Dispose();
             _sdStorage = null;
-        }
-
-        public void Execute()
-        {
-            Debug.Print("Starting sd detection...");
-
-            BindSdCardEventsHandlers();
-            _sdDetectionTimer.Start();
         }
 
         private void BindSdCardEventsHandlers()

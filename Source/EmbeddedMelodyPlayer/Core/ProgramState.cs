@@ -1,11 +1,11 @@
-using EmbeddedMelodyPlayer.Playing;
+using EmbeddedMelodyPlayer.Infrastructure;
 using Microsoft.SPOT.IO;
 
 namespace EmbeddedMelodyPlayer.Core
 {
     public class ProgramState
     {
-        public bool IsPlaying { get; set; }
+        public BusyScope BusyScope { get; set; }
         public VolumeInfo SdCardVolume { get; set; }
     }
 }

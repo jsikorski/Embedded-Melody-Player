@@ -5,8 +5,8 @@ namespace EmbeddedMelodyPlayer.Utils
 {
     public class SeparateThreadTimer
     {
-        private readonly Action _onTick;
         private readonly int _interval;
+        private readonly Action _onTick;
 
         private bool _isStarted;
         private bool _shouldWork;

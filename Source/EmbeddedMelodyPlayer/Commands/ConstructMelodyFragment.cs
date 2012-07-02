@@ -1,28 +1,31 @@
-using EmbeddedMelodyPlayer.Core;
 using EmbeddedMelodyPlayer.Infrastructure;
 using EmbeddedMelodyPlayer.Playing;
-using EmbeddedMelodyPlayer.Reading;
 using Microsoft.SPOT;
 
 namespace EmbeddedMelodyPlayer.Commands
 {
-    public class ConstructMelody : ICommand
+    public class ConstructMelodyFragment : ICommand
     {
-        private readonly PlayingContext _playingContext;
         private readonly MelodyCostructorProvider _melodyCostructorProvider;
+        private readonly PlayingContext _playingContext;
 
-        public ConstructMelody(PlayingContext playingContext)
+        public ConstructMelodyFragment(PlayingContext playingContext)
         {
             _playingContext = playingContext;
             _melodyCostructorProvider = new MelodyCostructorProvider();
         }
 
+        #region ICommand Members
+
         public void Execute()
         {
-            Debug.Print("Constructing melody...");
+            Debug.Print("Constructing melody fragment...");
 
             IMelodyConstructor melodyConstructor = _melodyCostructorProvider.GetMelodyConstructor();
-            _playingContext.MelodyFrament = melodyConstructor.CreateMelodyFromBytes(_playingContext.MelodyFileChunkData);
+            _playingContext.MelodyFrament = melodyConstructor.CreateMelodyFragmentFromBytes(
+                _playingContext.MelodyFileChunkData, _playingContext.WasEntireMelodyFileRead);
         }
+
+        #endregion
     }
 }

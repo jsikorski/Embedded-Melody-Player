@@ -1,26 +1,29 @@
 ﻿using System;
 using System.Text;
-using EmbeddedMelodyPlayer.Playing;
 
-namespace EmbeddedMelodyPlayer.Reading
+namespace EmbeddedMelodyPlayer.Playing
 {
     public class MeMelodyConstructor : IMelodyConstructor
     {
-        public MelodyFrament CreateMelodyFromBytes(byte[] melodyData)
+        #region IMelodyConstructor Members
+
+        public MelodyFrament CreateMelodyFragmentFromBytes(byte[] melodyData, bool isItLastFragment)
         {
             MelodyElement[] melodyElements;
             try
             {
-                var melodyString = GetMelodyString(melodyData);
+                string melodyString = GetMelodyString(melodyData);
                 melodyElements = GetMelodyElementsFromString(melodyString);
             }
             catch
             {
                 throw new ArgumentException("MelodyFrament data are invalid.");
             }
-            
-            return new MelodyFrament(melodyElements);
+
+            return new MelodyFrament(melodyElements, isItLastFragment);
         }
+
+        #endregion
 
         private string GetMelodyString(byte[] melodyData)
         {
@@ -31,7 +34,7 @@ namespace EmbeddedMelodyPlayer.Reading
         private MelodyElement[] GetMelodyElementsFromString(string melodyString)
         {
             string[] melodyElementsStrings = melodyString.Split(' ');
-            
+
             var melodyElements = new MelodyElement[melodyElementsStrings.Length];
             for (int i = 0; i < melodyElementsStrings.Length; i++)
             {

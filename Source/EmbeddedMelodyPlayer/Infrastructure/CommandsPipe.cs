@@ -1,18 +1,22 @@
 ﻿using System;
-using System.Threading;
 using EmbeddedMelodyPlayer.Utils;
-using Microsoft.SPOT;
 
 namespace EmbeddedMelodyPlayer.Infrastructure
 {
     public class CommandsPipe : ICommand
     {
-        private readonly ICommand[] _commands;
+        protected ICommand[] _commands;
 
         public CommandsPipe(ICommand[] commands)
         {
             _commands = commands;
         }
+
+        protected CommandsPipe()
+        {
+        }
+
+        #region ICommand Members
 
         public void Execute()
         {
@@ -31,5 +35,7 @@ namespace EmbeddedMelodyPlayer.Infrastructure
                 }
             }
         }
+
+        #endregion
     }
 }

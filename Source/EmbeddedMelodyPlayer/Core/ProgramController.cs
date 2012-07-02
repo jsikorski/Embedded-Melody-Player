@@ -1,4 +1,3 @@
-using System.Threading;
 using EmbeddedMelodyPlayer.Commands;
 using EmbeddedMelodyPlayer.Infrastructure;
 using EmbeddedMelodyPlayer.Playing;
@@ -15,33 +14,25 @@ namespace EmbeddedMelodyPlayer.Core
             Debug.Print("Program is starting...");
             _programState = new ProgramState();
 
-            ICommand startSdDetection = new StartSdDetection(TryPlay, _programState);
+            ICommand startSdDetection = new StartSdDetection(Play, _programState);
             CommandsInvoker.ExecuteCommand(startSdDetection);
         }
 
-        private void TryPlay()
+        private void Play()
         {
             var playingContext = new PlayingContext();
 
-            while (!playingContext.WasEntireMelodyFileRead)
+            using (_programState.BusyScope = new BusyScope())
             {
-                var playingPipe = CreatePlayingPipe(playingContext);
-                CommandsInvoker.ExecuteCommand(playingPipe);
+                while (!playingContext.WasEntireMelodyFileRead)
+                {
+                    PlayingMelodyFragmentPipe playingPipe = PlayingMelodyFragmentPipe.CreateForContext(playingContext,
+                                                                                                       _programState);
+                    CommandsInvoker.ExecuteCommand(playingPipe);
+                }
+
+                playingContext.WasLastMelodyFragmentPlayed.WaitOne();
             }
-        }
-
-        private CommandsPipe CreatePlayingPipe(PlayingContext playingContext)
-        {
-            ICommand readMelodyData = new ReadMelodyData(_programState.SdCardVolume, playingContext);
-            ICommand constructMelody = new ConstructMelody(playingContext);
-            ICommand playMelody = new PlayMelody(_programState, playingContext);
-
-            return new CommandsPipe(new[]
-                                        {
-                                            readMelodyData, 
-                                            constructMelody, 
-                                            playMelody, 
-                                        });
         }
     }
 }

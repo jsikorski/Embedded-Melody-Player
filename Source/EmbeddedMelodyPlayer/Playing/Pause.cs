@@ -1,5 +1,4 @@
 ﻿using System.Threading;
-using GHIElectronics.NETMF.Hardware;
 
 namespace EmbeddedMelodyPlayer.Playing
 {
@@ -7,15 +6,15 @@ namespace EmbeddedMelodyPlayer.Playing
     {
         public Pause(int duration)
         {
-           CheckElementParameters('P', duration);
+            CheckElementParameters('P', duration);
 
             Symbol = 'P';
-           Duration = duration;
+            Duration = duration;
         }
 
-        public override void Play(PWM output)
+        public override void Play()
         {
-            Thread.Sleep(Duration * 250);
+            Thread.Sleep(Duration*250);
         }
     }
 }

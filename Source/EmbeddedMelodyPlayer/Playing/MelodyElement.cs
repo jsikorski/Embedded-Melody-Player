@@ -1,5 +1,4 @@
 ﻿using System;
-using GHIElectronics.NETMF.Hardware;
 using VikingErik.NetMF.MicroLinq;
 
 namespace EmbeddedMelodyPlayer.Playing
@@ -53,6 +52,6 @@ namespace EmbeddedMelodyPlayer.Playing
             }
         }
 
-        public abstract void Play(PWM output);
+        public abstract void Play();
     }
 }

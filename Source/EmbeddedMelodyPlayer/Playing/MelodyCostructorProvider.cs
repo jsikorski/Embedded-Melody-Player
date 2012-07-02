@@ -1,4 +1,4 @@
-﻿namespace EmbeddedMelodyPlayer.Reading
+﻿namespace EmbeddedMelodyPlayer.Playing
 {
     public class MelodyCostructorProvider
     {

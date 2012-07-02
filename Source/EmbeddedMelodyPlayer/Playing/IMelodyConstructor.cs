@@ -1,9 +1,7 @@
-using EmbeddedMelodyPlayer.Playing;
-
-namespace EmbeddedMelodyPlayer.Reading
+namespace EmbeddedMelodyPlayer.Playing
 {
     public interface IMelodyConstructor
     {
-        MelodyFrament CreateMelodyFromBytes(byte[] melodyData);
+        MelodyFrament CreateMelodyFragmentFromBytes(byte[] melodyData, bool isItLastFragment);
     }
 }

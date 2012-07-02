@@ -1,12 +1,16 @@
-using EmbeddedMelodyPlayer.Playing;
+using System;
 
-namespace EmbeddedMelodyPlayer.Reading
+namespace EmbeddedMelodyPlayer.Playing
 {
     public class MidiMelodyConstructor : IMelodyConstructor
     {
-        public MelodyFrament CreateMelodyFromBytes(byte[] melodyData)
+        #region IMelodyConstructor Members
+
+        public MelodyFrament CreateMelodyFragmentFromBytes(byte[] melodyData, bool isItLastFragment)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
+
+        #endregion
     }
 }

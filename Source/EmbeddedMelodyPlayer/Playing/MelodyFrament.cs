@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using GHIElectronics.NETMF.Hardware;
-using VikingErik.NetMF.MicroLinq;
+﻿using VikingErik.NetMF.MicroLinq;
 
 namespace EmbeddedMelodyPlayer.Playing
 {
@@ -8,10 +6,13 @@ namespace EmbeddedMelodyPlayer.Playing
     {
         private readonly MelodyElement[] _melodyElements;
 
-        public MelodyFrament(MelodyElement[] melodyElements)
+        public MelodyFrament(MelodyElement[] melodyElements, bool isItLastFragment)
         {
             _melodyElements = melodyElements;
+            IsItLastFragment = isItLastFragment;
         }
+
+        public bool IsItLastFragment { get; private set; }
 
         public override string ToString()
         {
@@ -21,17 +22,17 @@ namespace EmbeddedMelodyPlayer.Playing
                 if (i == 0)
                     result += _melodyElements[i];
                 else
-                    result += " " + _melodyElements[i]; 
+                    result += " " + _melodyElements[i];
             }
 
             return result;
         }
 
-        public void Play(PWM output)
+        public void Play()
         {
             for (int i = 0; i < _melodyElements.Count(); i++)
             {
-                _melodyElements[i].Play(output);
+                _melodyElements[i].Play();
             }
         }
     }
