@@ -4,8 +4,11 @@ namespace EmbeddedMelodyPlayer.Infrastructure
 {
     public class BusyScope : IDisposable
     {
-        public BusyScope()
+        private readonly IFailureDetector _failureDetector;
+
+        public BusyScope(IFailureDetector failureDetector)
         {
+            _failureDetector = failureDetector;
             IsBusy = true;
         }
 

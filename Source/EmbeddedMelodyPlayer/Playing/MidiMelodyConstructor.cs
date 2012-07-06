@@ -6,7 +6,7 @@ namespace EmbeddedMelodyPlayer.Playing
     {
         #region IMelodyConstructor Members
 
-        public MelodyFrament CreateMelodyFragmentFromBytes(byte[] melodyData, bool isItLastFragment)
+        public MelodyFrament CreateMelodyFragmentFromBytes(byte[] melodyData, bool isFirst, bool isLast)
         {
             throw new NotImplementedException();
         }

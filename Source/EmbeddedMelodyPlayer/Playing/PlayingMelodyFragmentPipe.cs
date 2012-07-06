@@ -10,12 +10,11 @@ namespace EmbeddedMelodyPlayer.Playing
         {
         }
 
-        public static PlayingMelodyFragmentPipe CreateForContext(PlayingContext playingContext,
-                                                                 ProgramState programState)
+        public static PlayingMelodyFragmentPipe CreateForContext(PlayingContext playingContext)
         {
-            ICommand readMelodyFileChunk = new ReadMelodyFileChunk(programState.SdCardVolume, playingContext);
+            ICommand readMelodyFileChunk = new ReadMelodyFileChunk(playingContext.SdCardVolume, playingContext);
             ICommand constructMelodyFragment = new ConstructMelodyFragment(playingContext);
-            ICommand playMelodyFragment = new PlayMelodyFragment(programState, playingContext);
+            ICommand playMelodyFragment = new PlayMelodyFragment(playingContext);
 
             var commands = new[] {readMelodyFileChunk, constructMelodyFragment, playMelodyFragment};
             return new PlayingMelodyFragmentPipe {_commands = commands};

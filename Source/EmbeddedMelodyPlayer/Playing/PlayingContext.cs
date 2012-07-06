@@ -1,21 +1,32 @@
 ﻿using System.IO;
 using System.Threading;
+using EmbeddedMelodyPlayer.Infrastructure;
+using Microsoft.SPOT.IO;
 
 namespace EmbeddedMelodyPlayer.Playing
 {
-    public class PlayingContext
+    public class PlayingContext : IFailureDetector
     {
-        public PlayingContext()
-        {
-            CanPlay = new AutoResetEvent(true);
-            WasLastMelodyFragmentPlayed = new AutoResetEvent(false);
-        }
+        public VolumeInfo SdCardVolume { get; private set; }
 
-        public byte[] MelodyFileChunkData { get; set; }
-        public MelodyFrament MelodyFrament { get; set; }
+        public bool FailureDetected { get; set; }
+
         public FileStream MelodyFileStream { get; set; }
-        public AutoResetEvent CanPlay { get; private set; }
+        public byte[] MelodyFileChunkData { get; set; }
         public bool WasEntireMelodyFileRead { get; set; }
-        public AutoResetEvent WasLastMelodyFragmentPlayed { get; set; }
+        public MelodyFrament MelodyFragment { get; set; }
+
+        public AutoResetEvent PreviousMelodyFragmentRememberedEvent { get; private set; }
+        public AutoResetEvent PreviousMelodyFragmentPlayedEvent { get; private set; }
+        public AutoResetEvent LastMelodyFragmentPlayedEvent { get; private set; }
+
+        public PlayingContext(VolumeInfo sdCardVolume)
+        {
+            SdCardVolume = sdCardVolume;
+
+            PreviousMelodyFragmentRememberedEvent = new AutoResetEvent(false);
+            PreviousMelodyFragmentPlayedEvent = new AutoResetEvent(false);
+            LastMelodyFragmentPlayedEvent = new AutoResetEvent(false);
+        }
     }
 }

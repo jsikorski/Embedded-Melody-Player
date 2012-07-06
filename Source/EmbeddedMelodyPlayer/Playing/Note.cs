@@ -9,15 +9,16 @@ namespace EmbeddedMelodyPlayer.Playing
     public class Note : MelodyElement
     {
         private const int BuzzerPwmDutyCycle = 50;
+        private const int TempoMultiplier = 30;
 
-        private static readonly PWM BuzzerPwm = new PWM((PWM.Pin)FEZ_Pin.PWM.Di10);
+        //private static readonly PWM BuzzerPwm = new PWM((PWM.Pin)FEZ_Pin.PWM.Di10);
 
         private static readonly OutputPort[] NotesLeds = new[]
                                                              {
                                                                  new OutputPort((Cpu.Pin) FEZ_Pin.Digital.Di0, false),
                                                                  new OutputPort((Cpu.Pin) FEZ_Pin.Digital.Di1, false),
-                                                                 new OutputPort((Cpu.Pin) FEZ_Pin.Digital.Di11, false),
-                                                                 new OutputPort((Cpu.Pin) FEZ_Pin.Digital.Di12, false),
+                                                                 new OutputPort((Cpu.Pin) FEZ_Pin.Digital.Di2, false),
+                                                                 new OutputPort((Cpu.Pin) FEZ_Pin.Digital.Di3, false),
                                                                  new OutputPort((Cpu.Pin) FEZ_Pin.Digital.Di4, false),
                                                                  new OutputPort((Cpu.Pin) FEZ_Pin.Digital.Di5, false),
                                                                  new OutputPort((Cpu.Pin) FEZ_Pin.Digital.Di6, false),
@@ -59,13 +60,13 @@ namespace EmbeddedMelodyPlayer.Playing
         {
             var frequency = (int)NotesFrequencies[Symbol];
 
-            BuzzerPwm.Set(frequency, BuzzerPwmDutyCycle);
+            //BuzzerPwm.Set(frequency, BuzzerPwmDutyCycle);
             TurnNoteLedsOn();
 
-            Thread.Sleep(Duration * 200);
+            Thread.Sleep(Duration * TempoMultiplier);
 
             TurnAllNoteLedsOff();
-            BuzzerPwm.Set(false);
+            //BuzzerPwm.Set(false);
         }
 
         private void TurnNoteLedsOn()

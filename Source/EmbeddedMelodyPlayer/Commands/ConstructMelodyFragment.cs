@@ -15,17 +15,33 @@ namespace EmbeddedMelodyPlayer.Commands
             _melodyCostructorProvider = new MelodyCostructorProvider();
         }
 
-        #region ICommand Members
-
         public void Execute()
         {
             Debug.Print("Constructing melody fragment...");
 
-            IMelodyConstructor melodyConstructor = _melodyCostructorProvider.GetMelodyConstructor();
-            _playingContext.MelodyFrament = melodyConstructor.CreateMelodyFragmentFromBytes(
-                _playingContext.MelodyFileChunkData, _playingContext.WasEntireMelodyFileRead);
+            EnsureFragmentCanBeSafetlyOverwritten();
+            ConstructFragment();
         }
 
-        #endregion
+        private void EnsureFragmentCanBeSafetlyOverwritten()
+        {
+            if (!IsItFirstMelodyFragment())
+                _playingContext.PreviousMelodyFragmentRememberedEvent.WaitOne();
+        }
+
+        private bool IsItFirstMelodyFragment()
+        {
+            return _playingContext.MelodyFragment == null;
+        }
+
+        private void ConstructFragment()
+        {
+            IMelodyConstructor melodyConstructor = _melodyCostructorProvider.GetMelodyConstructor();
+
+            bool isItFirstFragment = _playingContext.MelodyFragment == null;
+            bool isItLastFragment = _playingContext.WasEntireMelodyFileRead;
+            _playingContext.MelodyFragment = melodyConstructor.CreateMelodyFragmentFromBytes(
+                _playingContext.MelodyFileChunkData, isItFirstFragment, isItLastFragment);
+        }
     }
 }

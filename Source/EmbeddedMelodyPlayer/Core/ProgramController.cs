@@ -2,37 +2,41 @@ using EmbeddedMelodyPlayer.Commands;
 using EmbeddedMelodyPlayer.Infrastructure;
 using EmbeddedMelodyPlayer.Playing;
 using Microsoft.SPOT;
+using Microsoft.SPOT.IO;
 
 namespace EmbeddedMelodyPlayer.Core
 {
     public class ProgramController
     {
-        private ProgramState _programState;
-
         public void Start()
         {
             Debug.Print("Program is starting...");
-            _programState = new ProgramState();
 
-            ICommand startSdDetection = new StartSdDetection(Play, _programState);
+            ICommand startSdDetection = new StartSdDetection(OnSdCardDetected);
             CommandsInvoker.ExecuteCommand(startSdDetection);
         }
 
-        private void Play()
+        private void OnSdCardDetected(VolumeInfo volumeInfo)
         {
-            var playingContext = new PlayingContext();
-
-            using (_programState.BusyScope = new BusyScope())
+            var playingContext = new PlayingContext(volumeInfo);
+            using (var busyScope = new BusyScope(playingContext))
             {
-                while (!playingContext.WasEntireMelodyFileRead)
-                {
-                    PlayingMelodyFragmentPipe playingPipe = PlayingMelodyFragmentPipe.CreateForContext(playingContext,
-                                                                                                       _programState);
-                    CommandsInvoker.ExecuteCommand(playingPipe);
-                }
-
-                playingContext.WasLastMelodyFragmentPlayed.WaitOne();
+                PlayMelody(playingContext);
             }
+        }
+
+        private static void PlayMelody(PlayingContext playingContext)
+        {
+            while (!playingContext.WasEntireMelodyFileRead)
+            {
+                PlayingMelodyFragmentPipe playingFragmentPipe = PlayingMelodyFragmentPipe.CreateForContext(playingContext);
+                CommandsInvoker.ExecuteCommand(playingFragmentPipe, () => playingContext.FailureDetected = true);
+
+                if (playingContext.FailureDetected)
+                    return;
+            }
+
+            playingContext.LastMelodyFragmentPlayedEvent.WaitOne();
         }
     }
 }

@@ -12,21 +12,17 @@ namespace EmbeddedMelodyPlayer.Commands
     {
         private const int SdDetectionTimerInterval = 500;
 
-        private readonly Action _onSdCardDetected;
-        private readonly ProgramState _programState;
+        private readonly SdCardDetect _onSdCardDetected;
         private readonly SeparateThreadTimer _sdDetectionTimer;
 
         private Thread _onDetectActionThread;
         private PersistentStorage _sdStorage;
 
-        public StartSdDetection(Action onSdCardDetected, ProgramState programState)
+        public StartSdDetection(SdCardDetect onSdCardDetected)
         {
             _onSdCardDetected = onSdCardDetected;
-            _programState = programState;
             _sdDetectionTimer = new SeparateThreadTimer(DetectSdCard, SdDetectionTimerInterval);
         }
-
-        #region ICommand Members
 
         public void Execute()
         {
@@ -36,15 +32,13 @@ namespace EmbeddedMelodyPlayer.Commands
             _sdDetectionTimer.Start();
         }
 
-        #endregion
-
         private void DetectSdCard()
         {
             try
             {
                 bool isSdCardDetected = IsSdCardDetected();
 
-                if (!_programState.BusyScope.IsBusy && isSdCardDetected && _sdStorage == null)
+                if (isSdCardDetected && _sdStorage == null)
                 {
                     Debug.Print("Sd card detected.");
                     InitializeSdStorage();
@@ -106,16 +100,14 @@ namespace EmbeddedMelodyPlayer.Commands
         private void RemovableMediaOnInsert(object sender, MediaEventArgs mediaEventArgs)
         {
             Debug.Print("Sd card file system mounted.");
-            _programState.SdCardVolume = mediaEventArgs.Volume;
 
-            _onDetectActionThread = new Thread(() => _onSdCardDetected());
+            _onDetectActionThread = new Thread(() => _onSdCardDetected(mediaEventArgs.Volume));
             _onDetectActionThread.Start();
         }
 
         private void RemovableMediaOnEject(object sender, MediaEventArgs mediaEventArgs)
         {
             Debug.Print("Sd card file system unmounted.");
-            _programState.SdCardVolume = null;
         }
     }
 }

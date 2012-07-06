@@ -1,5 +1,4 @@
 using System.Threading;
-using EmbeddedMelodyPlayer.Core;
 using EmbeddedMelodyPlayer.Infrastructure;
 using EmbeddedMelodyPlayer.Playing;
 using Microsoft.SPOT;
@@ -9,34 +8,43 @@ namespace EmbeddedMelodyPlayer.Commands
     public class PlayMelodyFragment : ICommand
     {
         private readonly PlayingContext _playingContext;
-        private readonly ProgramState _programState;
+        private readonly Thread _playingThread;
+        private MelodyFrament _melodyFragment;
 
-        public PlayMelodyFragment(ProgramState programState, PlayingContext playingContext)
+        public PlayMelodyFragment(PlayingContext playingContext)
         {
-            _programState = programState;
             _playingContext = playingContext;
+            _playingThread = new Thread(() => PlayFragment(_melodyFragment));
         }
-
-        #region ICommand Members
 
         public void Execute()
         {
-            var playingThread = new Thread(PlayFragment);
-            _playingContext.CanPlay.WaitOne();
-
-            Debug.Print("Playing melody fragment...");
-            playingThread.Start();
+            RememberMelodyFragment();
+            StartPlaying();
         }
 
-        #endregion
-
-        private void PlayFragment()
+        private void RememberMelodyFragment()
         {
-            _playingContext.MelodyFrament.Play();
-            _playingContext.CanPlay.Set();
+            _melodyFragment = _playingContext.MelodyFragment;
+            _playingContext.PreviousMelodyFragmentRememberedEvent.Set();
+        }
 
-            if (_playingContext.MelodyFrament.IsItLastFragment)
-                _playingContext.WasLastMelodyFragmentPlayed.Set();
+        private void StartPlaying()
+        {
+            if (!_melodyFragment.IsFirst)
+                _playingContext.PreviousMelodyFragmentPlayedEvent.WaitOne();
+
+            _playingThread.Start();
+        }
+
+        private void PlayFragment(MelodyFrament melodyFragment)
+        {            
+            Debug.Print("Playing melody fragment...");
+            melodyFragment.Play();
+            _playingContext.PreviousMelodyFragmentPlayedEvent.Set();
+
+            if (_melodyFragment.IsLast)
+                _playingContext.LastMelodyFragmentPlayedEvent.Set();
         }
     }
 }

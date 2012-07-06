@@ -7,7 +7,7 @@ namespace EmbeddedMelodyPlayer.Playing
     {
         #region IMelodyConstructor Members
 
-        public MelodyFrament CreateMelodyFragmentFromBytes(byte[] melodyData, bool isItLastFragment)
+        public MelodyFrament CreateMelodyFragmentFromBytes(byte[] melodyData, bool isFirst, bool isLast)
         {
             MelodyElement[] melodyElements;
             try
@@ -17,10 +17,10 @@ namespace EmbeddedMelodyPlayer.Playing
             }
             catch
             {
-                throw new ArgumentException("MelodyFrament data are invalid.");
+                throw new ArgumentException("MelodyFragment data are invalid.");
             }
 
-            return new MelodyFrament(melodyElements, isItLastFragment);
+            return new MelodyFrament(melodyElements, isFirst, isLast);
         }
 
         #endregion

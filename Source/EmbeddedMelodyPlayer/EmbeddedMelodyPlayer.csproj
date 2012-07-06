@@ -34,12 +34,12 @@
     <Compile Include="Commands\PlayMelodyFragment.cs" />
     <Compile Include="Commands\ReadMelodyFileChunk.cs" />
     <Compile Include="Commands\StartSdDetection.cs" />
-    <Compile Include="Core\ProgramState.cs" />
     <Compile Include="Core\ProgramController.cs" />
     <Compile Include="Infrastructure\BusyScope.cs" />
     <Compile Include="Infrastructure\CommandsInvoker.cs" />
     <Compile Include="Infrastructure\CommandsPipe.cs" />
     <Compile Include="Infrastructure\ICommand.cs" />
+    <Compile Include="Infrastructure\IFailureDetector.cs" />
     <Compile Include="Playing\IMelodyConstructor.cs" />
     <Compile Include="Playing\MelodyFrament.cs" />
     <Compile Include="Playing\MelodyCostructorProvider.cs" />
@@ -59,6 +59,7 @@
     </Compile>
     <Compile Include="Utils\Action.cs" />
     <Compile Include="Utils\DebugHelper.cs" />
+    <Compile Include="Utils\SdCardDetect.cs" />
     <Compile Include="Utils\SeparateThreadTimer.cs" />
   </ItemGroup>
   <ItemGroup>
