@@ -13,17 +13,17 @@ namespace EmbeddedMelodyPlayer.Playing
 
         //private static readonly PWM BuzzerPwm = new PWM((PWM.Pin)FEZ_Pin.PWM.Di10);
 
-        private static readonly OutputPort[] NotesLeds = new[]
-                                                             {
-                                                                 new OutputPort((Cpu.Pin) FEZ_Pin.Digital.Di0, false),
-                                                                 new OutputPort((Cpu.Pin) FEZ_Pin.Digital.Di1, false),
-                                                                 new OutputPort((Cpu.Pin) FEZ_Pin.Digital.Di2, false),
-                                                                 new OutputPort((Cpu.Pin) FEZ_Pin.Digital.Di3, false),
-                                                                 new OutputPort((Cpu.Pin) FEZ_Pin.Digital.Di4, false),
-                                                                 new OutputPort((Cpu.Pin) FEZ_Pin.Digital.Di5, false),
-                                                                 new OutputPort((Cpu.Pin) FEZ_Pin.Digital.Di6, false),
-                                                                 new OutputPort((Cpu.Pin) FEZ_Pin.Digital.Di7, false),
-                                                             };
+        //private static readonly OutputPort[] NotesLeds = new[]
+        //                                                     {
+        //                                                         new OutputPort((Cpu.Pin) FEZ_Pin.Digital.Di0, false),
+        //                                                         new OutputPort((Cpu.Pin) FEZ_Pin.Digital.Di1, false),
+        //                                                         new OutputPort((Cpu.Pin) FEZ_Pin.Digital.Di2, false),
+        //                                                         new OutputPort((Cpu.Pin) FEZ_Pin.Digital.Di3, false),
+        //                                                         new OutputPort((Cpu.Pin) FEZ_Pin.Digital.Di4, false),
+        //                                                         new OutputPort((Cpu.Pin) FEZ_Pin.Digital.Di5, false),
+        //                                                         new OutputPort((Cpu.Pin) FEZ_Pin.Digital.Di6, false),
+        //                                                         new OutputPort((Cpu.Pin) FEZ_Pin.Digital.Di7, false),
+        //                                                     };
 
         private static readonly IDictionary NotesFrequencies = new Hashtable
                                                                    {
@@ -73,7 +73,7 @@ namespace EmbeddedMelodyPlayer.Playing
         {
             for (int i = 0; i <= ToNumber(); i++)
             {
-                NotesLeds[i].Write(true);
+                //NotesLeds[i].Write(true);
             }
         }
 
@@ -84,10 +84,10 @@ namespace EmbeddedMelodyPlayer.Playing
 
         private void TurnAllNoteLedsOff()
         {
-            for (int i = 0; i < NotesLeds.Length; i++)
-            {
-                NotesLeds[i].Write(false);
-            }
+            //for (int i = 0; i < NotesLeds.Length; i++)
+            //{
+            //    NotesLeds[i].Write(false);
+            //}
         }
     }
 }
