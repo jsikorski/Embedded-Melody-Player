@@ -1,10 +1,9 @@
 ﻿using System;
 using System.IO;
 using EmbeddedMelodyPlayer.Playing;
-using EmbeddedMelodyPlayer.Reading;
 using NUnit.Framework;
 
-namespace Tests.Reading
+namespace EmbeddedMelodyPlayer.Tests.Reading
 {
     public class MeMelodyConstructorTests
     {
@@ -17,7 +16,7 @@ namespace Tests.Reading
             byte[] melodyData = File.ReadAllBytes(CorrectFilePath);
 
             IMelodyConstructor melodyConstructor = new MeMelodyConstructor();
-            Melody melody = melodyConstructor.CreateMelodyFromBytes(melodyData);
+            MelodyFrament melody = melodyConstructor.CreateMelodyFragmentFromBytes(melodyData, false, false);
 
             string expected = File.ReadAllText(CorrectFilePath);
             string actual = melody.ToString();
@@ -30,7 +29,7 @@ namespace Tests.Reading
             byte[] melodyData = File.ReadAllBytes(IncorrectFilePath);
 
             IMelodyConstructor melodyConstructor = new MeMelodyConstructor();
-            Assert.Throws<ArgumentException>(() => melodyConstructor.CreateMelodyFromBytes(melodyData));
+            Assert.Throws<ArgumentException>(() => melodyConstructor.CreateMelodyFragmentFromBytes(melodyData, false, false));
         }
     }
 }

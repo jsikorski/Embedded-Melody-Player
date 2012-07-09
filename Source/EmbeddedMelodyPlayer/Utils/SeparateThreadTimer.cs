@@ -6,12 +6,12 @@ namespace EmbeddedMelodyPlayer.Utils
     public class SeparateThreadTimer
     {
         private readonly int _interval;
-        private readonly Action _onTick;
+        private readonly BasicAction _onTick;
 
         private bool _isStarted;
         private bool _shouldWork;
 
-        public SeparateThreadTimer(Action onTick, int interval)
+        public SeparateThreadTimer(BasicAction onTick, int interval)
         {
             _onTick = onTick;
             _interval = interval;

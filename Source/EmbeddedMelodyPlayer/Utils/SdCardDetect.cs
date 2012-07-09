@@ -2,5 +2,5 @@
 
 namespace EmbeddedMelodyPlayer.Utils
 {
-    public delegate void SdCardDetect(VolumeInfo volumeInfo); 
+    public delegate void SdCardDetect(VolumeInfo volumeInfo);
 }

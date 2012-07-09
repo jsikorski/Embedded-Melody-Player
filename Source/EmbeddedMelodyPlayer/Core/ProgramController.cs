@@ -29,7 +29,8 @@ namespace EmbeddedMelodyPlayer.Core
         {
             while (!playingContext.WasEntireMelodyFileRead)
             {
-                PlayingMelodyFragmentPipe playingFragmentPipe = PlayingMelodyFragmentPipe.CreateForContext(playingContext);
+                PlayingMelodyFragmentPipe playingFragmentPipe =
+                    PlayingMelodyFragmentPipe.CreateForContext(playingContext);
                 CommandsInvoker.ExecuteCommand(playingFragmentPipe, () => playingContext.FailureDetected = true);
 
                 if (playingContext.FailureDetected)

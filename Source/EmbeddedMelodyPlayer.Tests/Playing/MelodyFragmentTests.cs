@@ -1,16 +1,15 @@
-﻿using System.Collections;
-using EmbeddedMelodyPlayer.Playing;
+﻿using EmbeddedMelodyPlayer.Playing;
 using NSubstitute;
 using NUnit.Framework;
 
-namespace Tests.Playing
+namespace EmbeddedMelodyPlayer.Tests.Playing
 {
-    public class MelodyTests
+    public class MelodyFragmentTests
     {
          [Test]
          public void to_string_returns_empty_for_empty_melody()
          {
-             var melody = new Melody(new MelodyElement[] {});
+             var melody = new MelodyFrament(new MelodyElement[] {}, false, false);
 
              string expected = string.Empty;
              string actual = melody.ToString();
@@ -29,7 +28,7 @@ namespace Tests.Playing
             melodyElement3.ToString().Returns("G[4]");
 
             var melodyElements = new[] {melodyElement1, melodyElement2, melodyElement3};
-            var melody = new Melody(melodyElements);
+            var melody = new MelodyFrament(melodyElements, false, false);
 
             const string expected = "C[1] D[2] G[4]";
             string actual = melody.ToString();

@@ -21,11 +21,15 @@ namespace EmbeddedMelodyPlayer.Commands
             _playingContext = playingContext;
         }
 
+        #region ICommand Members
+
         public void Execute()
         {
             Debug.Print("Reading melody file chunk from SD card...");
             _playingContext.MelodyFileChunkData = ReadFileChunk(MelodyFileName);
         }
+
+        #endregion
 
         private byte[] ReadFileChunk(string fileName)
         {

@@ -59,7 +59,7 @@ function Run-Tests($testAssemblies) {
 		write ("Running tests for assembly " + $testAssembly.Name + ".")
 		write "---------------------------------------------"
 		
-		$assemblyPath = $testAssembly.DirectoryName + "\" + $testAssembly.Name
+		$assemblyPath = $testAssembly.DirectoryName + "\" + $testAssembly.Name		
 		exec { .\Tools\nunit\nunit-console.exe $assemblyPath /nologo }
 	}
 }

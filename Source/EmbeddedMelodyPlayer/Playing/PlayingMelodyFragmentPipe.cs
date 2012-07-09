@@ -1,5 +1,4 @@
 ﻿using EmbeddedMelodyPlayer.Commands;
-using EmbeddedMelodyPlayer.Core;
 using EmbeddedMelodyPlayer.Infrastructure;
 
 namespace EmbeddedMelodyPlayer.Playing

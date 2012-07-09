@@ -2,6 +2,6 @@
 {
     public interface IFailureDetector
     {
-        bool FailureDetected { get; } 
+        bool FailureDetected { get; }
     }
 }

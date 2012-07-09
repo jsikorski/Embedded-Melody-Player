@@ -57,7 +57,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Utils\Action.cs" />
+    <Compile Include="Utils\BasicAction.cs" />
     <Compile Include="Utils\DebugHelper.cs" />
     <Compile Include="Utils\SdCardDetect.cs" />
     <Compile Include="Utils\SeparateThreadTimer.cs" />
@@ -84,5 +84,10 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\I2C\I2C.csproj">
+      <Project>{547B3501-83F4-40BC-9452-C4301EBFD7B1}</Project>
+      <Name>I2C</Name>
+    </ProjectReference>
+  </ItemGroup>
 </Project>

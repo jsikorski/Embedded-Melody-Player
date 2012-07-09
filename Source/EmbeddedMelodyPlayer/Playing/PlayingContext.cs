@@ -7,9 +7,16 @@ namespace EmbeddedMelodyPlayer.Playing
 {
     public class PlayingContext : IFailureDetector
     {
-        public VolumeInfo SdCardVolume { get; private set; }
+        public PlayingContext(VolumeInfo sdCardVolume)
+        {
+            SdCardVolume = sdCardVolume;
 
-        public bool FailureDetected { get; set; }
+            PreviousMelodyFragmentRememberedEvent = new AutoResetEvent(false);
+            PreviousMelodyFragmentPlayedEvent = new AutoResetEvent(false);
+            LastMelodyFragmentPlayedEvent = new AutoResetEvent(false);
+        }
+
+        public VolumeInfo SdCardVolume { get; private set; }
 
         public FileStream MelodyFileStream { get; set; }
         public byte[] MelodyFileChunkData { get; set; }
@@ -20,13 +27,10 @@ namespace EmbeddedMelodyPlayer.Playing
         public AutoResetEvent PreviousMelodyFragmentPlayedEvent { get; private set; }
         public AutoResetEvent LastMelodyFragmentPlayedEvent { get; private set; }
 
-        public PlayingContext(VolumeInfo sdCardVolume)
-        {
-            SdCardVolume = sdCardVolume;
+        #region IFailureDetector Members
 
-            PreviousMelodyFragmentRememberedEvent = new AutoResetEvent(false);
-            PreviousMelodyFragmentPlayedEvent = new AutoResetEvent(false);
-            LastMelodyFragmentPlayedEvent = new AutoResetEvent(false);
-        }
+        public bool FailureDetected { get; set; }
+
+        #endregion
     }
 }

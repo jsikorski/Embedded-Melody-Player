@@ -15,6 +15,8 @@ namespace EmbeddedMelodyPlayer.Commands
             _melodyCostructorProvider = new MelodyCostructorProvider();
         }
 
+        #region ICommand Members
+
         public void Execute()
         {
             Debug.Print("Constructing melody fragment...");
@@ -22,6 +24,8 @@ namespace EmbeddedMelodyPlayer.Commands
             EnsureFragmentCanBeSafetlyOverwritten();
             ConstructFragment();
         }
+
+        #endregion
 
         private void EnsureFragmentCanBeSafetlyOverwritten()
         {

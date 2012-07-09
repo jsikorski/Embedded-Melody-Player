@@ -6,15 +6,15 @@ namespace EmbeddedMelodyPlayer.Playing
     {
         private readonly MelodyElement[] _melodyElements;
 
-        public bool IsFirst { get; private set; }
-        public bool IsLast { get; private set; }
-
         public MelodyFrament(MelodyElement[] melodyElements, bool isFirst, bool isLast)
         {
             _melodyElements = melodyElements;
             IsFirst = isFirst;
             IsLast = isLast;
         }
+
+        public bool IsFirst { get; private set; }
+        public bool IsLast { get; private set; }
 
         public override string ToString()
         {

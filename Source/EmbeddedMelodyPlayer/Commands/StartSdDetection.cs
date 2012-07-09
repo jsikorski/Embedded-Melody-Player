@@ -1,5 +1,4 @@
 ﻿using System.Threading;
-using EmbeddedMelodyPlayer.Core;
 using EmbeddedMelodyPlayer.Infrastructure;
 using EmbeddedMelodyPlayer.Utils;
 using GHIElectronics.NETMF.IO;
@@ -24,6 +23,8 @@ namespace EmbeddedMelodyPlayer.Commands
             _sdDetectionTimer = new SeparateThreadTimer(DetectSdCard, SdDetectionTimerInterval);
         }
 
+        #region ICommand Members
+
         public void Execute()
         {
             Debug.Print("Starting sd detection...");
@@ -31,6 +32,8 @@ namespace EmbeddedMelodyPlayer.Commands
             BindSdCardEventsHandlers();
             _sdDetectionTimer.Start();
         }
+
+        #endregion
 
         private void DetectSdCard()
         {

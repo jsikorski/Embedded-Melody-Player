@@ -9,8 +9,8 @@
     <ProjectGuid>{3E6CCB5A-334B-4865-B163-4259392B2AC9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Tests</RootNamespace>
-    <AssemblyName>Tests</AssemblyName>
+    <RootNamespace>EmbeddedMelodyPlayer.Tests</RootNamespace>
+    <AssemblyName>EmbeddedMelodyPlayer.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -27,7 +27,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\..\Build\Tests\</OutputPath>
+    <OutputPath>..\..\Build\EmbeddedMelodyPlayer.Tests\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -50,14 +50,50 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\EmbeddedMelodyPlayer\Pins\Outputs.cs">
-      <Link>References\Pins\Outputs.cs</Link>
+    <Compile Include="..\EmbeddedMelodyPlayer\Commands\ConstructMelodyFragment.cs">
+      <Link>References\Commands\ConstructMelodyFragment.cs</Link>
     </Compile>
-    <Compile Include="..\EmbeddedMelodyPlayer\Playing\Melody.cs">
-      <Link>References\Playing\Melody.cs</Link>
+    <Compile Include="..\EmbeddedMelodyPlayer\Commands\PlayMelodyFragment.cs">
+      <Link>References\Commands\PlayMelodyFragment.cs</Link>
+    </Compile>
+    <Compile Include="..\EmbeddedMelodyPlayer\Commands\ReadMelodyFileChunk.cs">
+      <Link>References\Commands\ReadMelodyFileChunk.cs</Link>
+    </Compile>
+    <Compile Include="..\EmbeddedMelodyPlayer\Commands\StartSdDetection.cs">
+      <Link>References\Commands\StartSdDetection.cs</Link>
+    </Compile>
+    <Compile Include="..\EmbeddedMelodyPlayer\Infrastructure\BusyScope.cs">
+      <Link>References\Infrastructure\BusyScope.cs</Link>
+    </Compile>
+    <Compile Include="..\EmbeddedMelodyPlayer\Infrastructure\CommandsInvoker.cs">
+      <Link>References\Infrastructure\CommandsInvoker.cs</Link>
+    </Compile>
+    <Compile Include="..\EmbeddedMelodyPlayer\Infrastructure\CommandsPipe.cs">
+      <Link>References\Infrastructure\CommandsPipe.cs</Link>
+    </Compile>
+    <Compile Include="..\EmbeddedMelodyPlayer\Infrastructure\ICommand.cs">
+      <Link>References\Infrastructure\ICommand.cs</Link>
+    </Compile>
+    <Compile Include="..\EmbeddedMelodyPlayer\Infrastructure\IFailureDetector.cs">
+      <Link>References\Infrastructure\IFailureDetector.cs</Link>
+    </Compile>
+    <Compile Include="..\EmbeddedMelodyPlayer\Playing\IMelodyConstructor.cs">
+      <Link>References\Playing\IMelodyConstructor.cs</Link>
+    </Compile>
+    <Compile Include="..\EmbeddedMelodyPlayer\Playing\MelodyCostructorProvider.cs">
+      <Link>References\Playing\MelodyCostructorProvider.cs</Link>
     </Compile>
     <Compile Include="..\EmbeddedMelodyPlayer\Playing\MelodyElement.cs">
       <Link>References\Playing\MelodyElement.cs</Link>
+    </Compile>
+    <Compile Include="..\EmbeddedMelodyPlayer\Playing\MelodyFrament.cs">
+      <Link>References\Playing\MelodyFrament.cs</Link>
+    </Compile>
+    <Compile Include="..\EmbeddedMelodyPlayer\Playing\MeMelodyConstructor.cs">
+      <Link>References\Playing\MeMelodyConstructor.cs</Link>
+    </Compile>
+    <Compile Include="..\EmbeddedMelodyPlayer\Playing\MidiMelodyConstructor.cs">
+      <Link>References\Playing\MidiMelodyConstructor.cs</Link>
     </Compile>
     <Compile Include="..\EmbeddedMelodyPlayer\Playing\Note.cs">
       <Link>References\Playing\Note.cs</Link>
@@ -65,25 +101,30 @@
     <Compile Include="..\EmbeddedMelodyPlayer\Playing\Pause.cs">
       <Link>References\Playing\Pause.cs</Link>
     </Compile>
-    <Compile Include="..\EmbeddedMelodyPlayer\Reading\IMelodyConstructor.cs">
-      <Link>References\Reading\IMelodyConstructor.cs</Link>
+    <Compile Include="..\EmbeddedMelodyPlayer\Playing\PlayingContext.cs">
+      <Link>References\Playing\PlayingContext.cs</Link>
     </Compile>
-    <Compile Include="..\EmbeddedMelodyPlayer\Reading\MelodyCostructorProvider.cs">
-      <Link>References\Reading\MelodyCostructorProvider.cs</Link>
+    <Compile Include="..\EmbeddedMelodyPlayer\Playing\PlayingMelodyFragmentPipe.cs">
+      <Link>References\Playing\PlayingMelodyFragmentPipe.cs</Link>
     </Compile>
-    <Compile Include="..\EmbeddedMelodyPlayer\Reading\MeMelodyConstructor.cs">
-      <Link>References\Reading\MeMelodyConstructor.cs</Link>
+    <Compile Include="..\EmbeddedMelodyPlayer\Utils\BasicAction.cs">
+      <Link>References\Utils\BasicAction.cs</Link>
     </Compile>
-    <Compile Include="..\EmbeddedMelodyPlayer\Reading\MidiMelodyConstructor.cs">
-      <Link>References\Reading\MidiMelodyConstructor.cs</Link>
+    <Compile Include="..\EmbeddedMelodyPlayer\Utils\DebugHelper.cs">
+      <Link>References\Utils\DebugHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\EmbeddedMelodyPlayer\Utils\SdCardDetect.cs">
+      <Link>References\Utils\SdCardDetect.cs</Link>
+    </Compile>
+    <Compile Include="..\EmbeddedMelodyPlayer\Utils\SeparateThreadTimer.cs">
+      <Link>References\Utils\SeparateThreadTimer.cs</Link>
     </Compile>
     <Compile Include="Playing\MelodyElementTests.cs" />
-    <Compile Include="Playing\MelodyTests.cs" />
+    <Compile Include="Playing\MelodyFragmentTests.cs" />
     <Compile Include="Playing\NoteTests.cs" />
     <Compile Include="Playing\PauseTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reading\MeMelodyConstructorTests.cs" />
-    <Compile Include="References\MocksModels.cs" />
     <Compile Include="References\Supplements.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -95,7 +136,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="References\Core\" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

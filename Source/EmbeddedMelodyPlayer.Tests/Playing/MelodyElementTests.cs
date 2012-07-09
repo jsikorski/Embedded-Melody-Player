@@ -2,7 +2,7 @@
 using EmbeddedMelodyPlayer.Playing;
 using NUnit.Framework;
 
-namespace Tests.Playing
+namespace EmbeddedMelodyPlayer.Tests.Playing
 {
     public class MelodyElementTests
     {

@@ -1,4 +1,4 @@
 ﻿namespace EmbeddedMelodyPlayer.Utils
 {
-    public delegate void Action();
+    public delegate void BasicAction();
 }
