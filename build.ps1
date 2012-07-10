@@ -4,7 +4,7 @@ properties {
 	$build_dir 	 	 = "Build"
 	$release_dir 	 = "Release"
 	$sln_file 	 	 = "Source\EmbeddedMelodyPlayer.sln"
-	$nuget_base_file = "Source\packages\repositories.config"
+	$nuget_base_file = "Packages\repositories.config"
 }
 
 function Get-NugetRepositoriesPaths() {

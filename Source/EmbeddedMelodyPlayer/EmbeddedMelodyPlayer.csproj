@@ -74,7 +74,7 @@
     </Reference>
     <Reference Include="System.IO" />
     <Reference Include="VikingErik.NetMF.MicroLinq">
-      <HintPath>..\Libraries\VikingErik.NetMF.MicroLinq\VikingErik.NetMF.MicroLinq.dll</HintPath>
+      <HintPath>..\..\Libraries\VikingErik.NetMF.MicroLinq\VikingErik.NetMF.MicroLinq.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

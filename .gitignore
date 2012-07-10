@@ -37,6 +37,6 @@ aspnetdb_log.ldf
 
 Build
 Release
-Source/packages/*
-!Source/packages/repositories.config
+Packages
+!Packages/repositories.config
 TestResult.xml
