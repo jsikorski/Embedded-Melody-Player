@@ -128,6 +128,9 @@ namespace GHIElectronics.NETMF.FEZ
     {
         internal enum PWM
         {
+            Di5,
+            Di8,
+            Di9,
             Di10
         }
 
@@ -141,6 +144,20 @@ namespace GHIElectronics.NETMF.FEZ
             Di5,
             Di6,
             Di7,
+        }
+    }
+}
+
+namespace I2C.Expander
+{
+    public class I2CExpander
+    {
+        public I2CExpander(byte pinsMode)
+        {
+        }
+
+        public void Write(byte value)
+        {
         }
     }
 }

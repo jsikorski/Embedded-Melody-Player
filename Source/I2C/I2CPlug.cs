@@ -54,7 +54,7 @@ namespace I2C
 
         private static bool WasAllDataWritten(byte[] data, int numberOfWrittenBytes)
         {
-            return numberOfWrittenBytes < data.Length;
+            return numberOfWrittenBytes >= data.Length;
         }
 
         protected void WriteToRegister(byte register, byte[] values)

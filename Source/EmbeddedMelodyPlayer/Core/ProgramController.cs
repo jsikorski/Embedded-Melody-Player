@@ -13,13 +13,13 @@ namespace EmbeddedMelodyPlayer.Core
             Debug.Print("Program is starting...");
 
             ICommand startSdDetection = new StartSdDetection(OnSdCardDetected);
-            CommandsInvoker.ExecuteCommand(startSdDetection);
+            CommandsInvoker.Execute(startSdDetection);
         }
 
         private void OnSdCardDetected(VolumeInfo volumeInfo)
         {
             var playingContext = new PlayingContext(volumeInfo);
-            using (var busyScope = new BusyScope(playingContext))
+            using (new BusyScope(playingContext))
             {
                 PlayMelody(playingContext);
             }
@@ -29,9 +29,8 @@ namespace EmbeddedMelodyPlayer.Core
         {
             while (!playingContext.WasEntireMelodyFileRead)
             {
-                PlayingMelodyFragmentPipe playingFragmentPipe =
-                    PlayingMelodyFragmentPipe.CreateForContext(playingContext);
-                CommandsInvoker.ExecuteCommand(playingFragmentPipe, () => playingContext.FailureDetected = true);
+                var playingFragmentPipe = PlayingMelodyFragmentPipe.CreateForContext(playingContext);
+                CommandsInvoker.Execute(playingFragmentPipe, () => playingContext.FailureDetected = true);
 
                 if (playingContext.FailureDetected)
                     return;

@@ -15,9 +15,9 @@ namespace EmbeddedMelodyPlayer.Playing
                 string melodyString = GetMelodyString(melodyData);
                 melodyElements = GetMelodyElementsFromString(melodyString);
             }
-            catch
+            catch (Exception exception)
             {
-                throw new ArgumentException("MelodyFragment data are invalid.");
+                throw new ArgumentException("MelodyFragment data are invalid.", exception);
             }
 
             return new MelodyFrament(melodyElements, isFirst, isLast);

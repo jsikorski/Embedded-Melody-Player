@@ -119,6 +119,7 @@
     <Compile Include="..\EmbeddedMelodyPlayer\Utils\SeparateThreadTimer.cs">
       <Link>References\Utils\SeparateThreadTimer.cs</Link>
     </Compile>
+    <Compile Include="Infrastructure\CommandsInvokerTests.cs" />
     <Compile Include="Playing\MelodyElementTests.cs" />
     <Compile Include="Playing\MelodyFragmentTests.cs" />
     <Compile Include="Playing\NoteTests.cs" />
