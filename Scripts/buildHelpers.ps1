@@ -13,7 +13,7 @@ function Download-Dependencies {
 
 	$nugetRepositoriesPaths = Get-NugetRepositoriesPaths -nugetBaseFile $nugetBaseFile
 	
-	$dependenciesDestinationDir = Split-Path($nugetBaseFile)	
+	$dependenciesDestinationDir = Split-Path($nugetBaseFile)
 	foreach ($nugetRepositoryPath in $nugetRepositoriesPaths) {
 		exec { & $nugetPath install $nugetRepositoryPath -o $dependenciesDestinationDir }
 	}
