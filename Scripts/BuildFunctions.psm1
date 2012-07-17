@@ -70,7 +70,7 @@ function Start-Tests {
 	}
 }
 
-function Get-AllProjects() {
+function Get-AllProjects {
 	param(
 		[Parameter(Mandatory=$true)]
 		[ValidateNotNullOrEmpty()]
@@ -92,7 +92,7 @@ function Get-AllProjects() {
 	return $projects
 }
 
-function Get-TestAssemblies() {
+function Get-TestAssemblies {
 	param(
 		[Parameter(Mandatory=$true)]
 		[ValidateNotNullOrEmpty()]
