@@ -1,21 +1,21 @@
-function Download-Dependencies {
+function Get-Dependencies {
 	param(
 		[Parameter(Mandatory=$true)]
 		[ValidateNotNullOrEmpty()]
 		[string]
-		$nugetPath,
+		$NugetPath,
 		
 		[Parameter(Mandatory=$true)]
 		[ValidateNotNullOrEmpty()]
 		[string]
-		$nugetBaseFile
+		$NugetBaseFile
 	)
 
-	$nugetRepositoriesPaths = Get-NugetRepositoriesPaths -nugetBaseFile $nugetBaseFile
+	$nugetRepositoriesPaths = Get-NugetRepositoriesPaths -NugetBaseFile $NugetBaseFile
 	
-	$dependenciesDestinationDir = Split-Path($nugetBaseFile)
+	$dependenciesDestinationDir = Split-Path($NugetBaseFile)
 	foreach ($nugetRepositoryPath in $nugetRepositoriesPaths) {
-		exec { & $nugetPath install $nugetRepositoryPath -o $dependenciesDestinationDir }
+		exec { & $NugetPath install $nugetRepositoryPath -o $dependenciesDestinationDir }
 	}
 }
 
@@ -24,33 +24,41 @@ function Get-NugetRepositoriesPaths() {
 		[Parameter(Mandatory=$true)]
 		[ValidateNotNullOrEmpty()]
 		[string]
-		$nugetBaseFile
+		$NugetBaseFile
 	)
 	
-	$nugetRepositories = ([xml](Get-Content $nugetBaseFile)).repositories.repository	
+	$nugetRepositories = ([xml](Get-Content $NugetBaseFile)).repositories.repository	
 	$nugetRepositoriesPaths = @()
 	foreach ($nugetRepository in $nugetRepositories) {
-		$completeRepositoryPath = (Split-Path($nugetBaseFile)) + "\" + $nugetRepository.path
+		$completeRepositoryPath = (Split-Path($NugetBaseFile)) + "\" + $nugetRepository.path
 		$nugetRepositoriesPaths += @($completeRepositoryPath)
 	}
 	return $nugetRepositoriesPaths
 }
 
-function Run-Tests {
+function Start-Tests {
 	param(
 		[Parameter(Mandatory=$true)]
 		[ValidateNotNullOrEmpty()]
 		[string]
-		$slnFile,
+		$SlnFile,
 	
 		[Parameter(Mandatory=$true)]
 		[ValidateNotNullOrEmpty()]
 		[string]
-		$nunitPath
+		$NUnitPath, 
+		
+		[Parameter(Mandatory=$true)]
+		[ValidateNotNullOrEmpty()]
+		[string]
+		$BuildDir,
+		
+		[string]
+		$TestsResultsFile = "TestsResults.xml"
 	)
 
-	$projects = Get-AllProjects -slnFile $slnFile
-	$testAssemblies = Get-TestAssemblies -projects $projects
+	$projects = Get-AllProjects -SlnFile $SlnFile
+	$testAssemblies = Get-TestAssemblies -Projects $Projects -BuildDir $BuildDir
 	
 	foreach ($testAssembly in $testAssemblies) {
 		write "---------------------------------------------"
@@ -58,7 +66,7 @@ function Run-Tests {
 		write "---------------------------------------------"
 		
 		$assemblyPath = $testAssembly.DirectoryName + "\" + $testAssembly.Name		
-		exec { & $nunitPath $assemblyPath /nologo }
+		exec { & $NUnitPath $assemblyPath /nologo /result=$TestsResultsFile }
 	}
 }
 
@@ -67,11 +75,11 @@ function Get-AllProjects() {
 		[Parameter(Mandatory=$true)]
 		[ValidateNotNullOrEmpty()]
 		[string]
-		$slnFile
+		$SlnFile
 	)
 	
 	$projects = @()
-	Get-Content $slnFile | 
+	Get-Content $SlnFile | 
 		Select-String "Project\(" | 
 			ForEach-Object {
 				$projectParts = $_ -Split '[,=]' | ForEach-Object { $_.Trim('[ "{}]') };
@@ -89,12 +97,17 @@ function Get-TestAssemblies() {
 		[Parameter(Mandatory=$true)]
 		[ValidateNotNullOrEmpty()]
 		[System.Object[]]
-		$projects
+		$Projects, 
+		
+		[Parameter(Mandatory=$true)]
+		[ValidateNotNullOrEmpty()]
+		[string]
+		$BuildDir
 	)
 
 	$testAssemblies = @()
-	foreach ($project in $projects) {
-		Get-ChildItem $build_dir -Recurse -Filter (($project.Name + ".dll")) | 
+	foreach ($project in $Projects) {
+		Get-ChildItem $BuildDir -Recurse -Filter (($project.Name + ".dll")) | 
 		ForEach-Object {			
 			if (Test-Path ($_.DirectoryName + "\nunit.framework.dll")) {
 				$testAssembliesPaths += $_
