@@ -17,15 +17,11 @@ namespace EmbeddedMelodyPlayer.Commands
             _playingThread = new Thread(() => PlayFragment(_melodyFragment));
         }
 
-        #region ICommand Members
-
         public void Execute()
         {
             RememberMelodyFragment();
             StartPlaying();
         }
-
-        #endregion
 
         private void RememberMelodyFragment()
         {
