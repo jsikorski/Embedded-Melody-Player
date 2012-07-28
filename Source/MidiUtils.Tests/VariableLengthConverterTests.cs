@@ -18,9 +18,11 @@ namespace MidiUtils.Tests
         [Test]
         public void multiple_bytes_value_should_be_correctly_converted()
         {
+            CheckIfMultipleBytesValueIsCorrectlyConverted(new byte[] {0x80, 0x00}, 0);
             CheckIfMultipleBytesValueIsCorrectlyConverted(new byte[] {0xff, 0x7f}, 16383);
             CheckIfMultipleBytesValueIsCorrectlyConverted(new byte[] {0xf3, 0x3f}, 14783);
             CheckIfMultipleBytesValueIsCorrectlyConverted(new byte[] {0xfc, 0x4d}, 15949);
+            CheckIfMultipleBytesValueIsCorrectlyConverted(new byte[] {0xFF, 0xFF, 0xFF, 0x7F}, 0x0FFFFFFF);
         }
 
         private static void CheckIfMultipleBytesValueIsCorrectlyConverted(byte[] value, int expected)
