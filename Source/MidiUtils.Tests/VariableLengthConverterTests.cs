@@ -1,7 +1,7 @@
 ﻿using System;
 using NUnit.Framework;
 
-namespace MidiReader.Tests
+namespace MidiUtils.Tests
 {
     public class VariableLengthConverterTests
     {

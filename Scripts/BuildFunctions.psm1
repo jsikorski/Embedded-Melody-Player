@@ -108,12 +108,13 @@ function Get-TestAssemblies {
 	$testAssembliesPaths = @()
 	foreach ($project in $Projects) {
 		Get-ChildItem $BuildDir -Recurse -Filter (($project.Name + ".dll")) | 
-		ForEach-Object {			
+		ForEach-Object {
 			if (Test-Path ($_.DirectoryName + "\nunit.framework.dll")) {
 				$testAssembliesPaths += $_
 			}
 		}
 	}
+	
 	return $testAssembliesPaths	
 }
 

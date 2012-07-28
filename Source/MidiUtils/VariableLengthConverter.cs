@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MidiReader
+namespace MidiUtils
 {
     public static class VariableLengthConverter
     {
