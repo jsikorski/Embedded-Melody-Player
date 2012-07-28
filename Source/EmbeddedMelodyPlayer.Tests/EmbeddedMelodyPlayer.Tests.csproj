@@ -107,6 +107,15 @@
     <Compile Include="..\EmbeddedMelodyPlayer\Playing\PlayingMelodyFragmentPipe.cs">
       <Link>References\Playing\PlayingMelodyFragmentPipe.cs</Link>
     </Compile>
+    <Compile Include="..\EmbeddedMelodyPlayer\Reading\IMelodyFileReader.cs">
+      <Link>Reading\IMelodyFileReader.cs</Link>
+    </Compile>
+    <Compile Include="..\EmbeddedMelodyPlayer\Reading\MelodyFileReaderProvider.cs">
+      <Link>Reading\MelodyFileReaderProvider.cs</Link>
+    </Compile>
+    <Compile Include="..\EmbeddedMelodyPlayer\Reading\MeMelodyFileReader.cs">
+      <Link>Reading\MeMelodyFileReader.cs</Link>
+    </Compile>
     <Compile Include="..\EmbeddedMelodyPlayer\Utils\BasicAction.cs">
       <Link>References\Utils\BasicAction.cs</Link>
     </Compile>
@@ -122,10 +131,10 @@
     <Compile Include="Infrastructure\CommandsInvokerTests.cs" />
     <Compile Include="Playing\MelodyElementTests.cs" />
     <Compile Include="Playing\MelodyFragmentTests.cs" />
+    <Compile Include="Playing\MeMelodyConstructorTests.cs" />
     <Compile Include="Playing\NoteTests.cs" />
     <Compile Include="Playing\PauseTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Reading\MeMelodyConstructorTests.cs" />
     <Compile Include="References\Supplements.cs" />
   </ItemGroup>
   <ItemGroup>

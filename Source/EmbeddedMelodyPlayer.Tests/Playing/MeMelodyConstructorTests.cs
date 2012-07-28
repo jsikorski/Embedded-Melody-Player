@@ -1,9 +1,9 @@
-﻿using System;
+using System;
 using System.IO;
 using EmbeddedMelodyPlayer.Playing;
 using NUnit.Framework;
 
-namespace EmbeddedMelodyPlayer.Tests.Reading
+namespace EmbeddedMelodyPlayer.Tests.Playing
 {
     public class MeMelodyConstructorTests
     {

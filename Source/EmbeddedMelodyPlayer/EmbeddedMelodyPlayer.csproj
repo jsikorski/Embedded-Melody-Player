@@ -52,6 +52,9 @@
     <Compile Include="Playing\PlayingMelodyFragmentPipe.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="Reading\IMelodyFileReader.cs" />
+    <Compile Include="Reading\MelodyFileReaderProvider.cs" />
+    <Compile Include="Reading\MeMelodyFileReader.cs" />
     <Compile Include="Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
