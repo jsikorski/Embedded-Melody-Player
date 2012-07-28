@@ -105,7 +105,7 @@ function Get-TestAssemblies {
 		$BuildDir
 	)
 
-	$testAssemblies = @()
+	$testAssembliesPaths = @()
 	foreach ($project in $Projects) {
 		Get-ChildItem $BuildDir -Recurse -Filter (($project.Name + ".dll")) | 
 		ForEach-Object {			

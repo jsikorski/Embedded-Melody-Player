@@ -12,6 +12,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{4BC757
 		.nuget\packages.config = .nuget\packages.config
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MidiReader", "MidiReader\MidiReader.csproj", "{58961C81-38CE-4978-93F0-CD9A8174AA8E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MidiReader.Tests", "MidiReader.Tests\MidiReader.Tests.csproj", "{8DFC94F0-E1A1-464F-B673-B8650D93B3AD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,6 +36,14 @@ Global
 		{547B3501-83F4-40BC-9452-C4301EBFD7B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{547B3501-83F4-40BC-9452-C4301EBFD7B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{547B3501-83F4-40BC-9452-C4301EBFD7B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58961C81-38CE-4978-93F0-CD9A8174AA8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58961C81-38CE-4978-93F0-CD9A8174AA8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58961C81-38CE-4978-93F0-CD9A8174AA8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58961C81-38CE-4978-93F0-CD9A8174AA8E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8DFC94F0-E1A1-464F-B673-B8650D93B3AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DFC94F0-E1A1-464F-B673-B8650D93B3AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DFC94F0-E1A1-464F-B673-B8650D93B3AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DFC94F0-E1A1-464F-B673-B8650D93B3AD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
