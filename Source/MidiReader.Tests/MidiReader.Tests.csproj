@@ -50,7 +50,15 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\MidiReader\MidiReader.cs">
+      <Link>References\MidiReader.cs</Link>
+    </Compile>
+    <Compile Include="..\MidiReader\VariableLengthConverter.cs">
+      <Link>References\VariableLengthConverter.cs</Link>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="References\Suplements.cs" />
+    <Compile Include="VariableLengthConverterTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
