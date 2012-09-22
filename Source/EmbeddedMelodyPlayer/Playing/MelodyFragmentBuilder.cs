@@ -3,10 +3,8 @@ using System.Text;
 
 namespace EmbeddedMelodyPlayer.Playing
 {
-    public class MeMelodyConstructor : IMelodyConstructor
+    public class MelodyFragmentBuilder
     {
-        #region IMelodyConstructor Members
-
         public MelodyFrament CreateMelodyFragmentFromBytes(byte[] melodyData, bool isFirst, bool isLast)
         {
             MelodyElement[] melodyElements;
@@ -22,8 +20,6 @@ namespace EmbeddedMelodyPlayer.Playing
 
             return new MelodyFrament(melodyElements, isFirst, isLast);
         }
-
-        #endregion
 
         private string GetMelodyString(byte[] melodyData)
         {

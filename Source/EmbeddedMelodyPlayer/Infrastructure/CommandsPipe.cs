@@ -16,8 +16,6 @@ namespace EmbeddedMelodyPlayer.Infrastructure
         {
         }
 
-        #region ICommand Members
-
         public void Execute()
         {
             for (int i = 0; i < _commands.Length; i++)
@@ -35,7 +33,5 @@ namespace EmbeddedMelodyPlayer.Infrastructure
                 }
             }
         }
-
-        #endregion
     }
 }

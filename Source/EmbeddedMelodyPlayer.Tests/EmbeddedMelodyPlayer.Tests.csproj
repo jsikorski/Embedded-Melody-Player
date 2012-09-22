@@ -50,8 +50,8 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\EmbeddedMelodyPlayer\Commands\ConstructMelodyFragment.cs">
-      <Link>References\Commands\ConstructMelodyFragment.cs</Link>
+    <Compile Include="..\EmbeddedMelodyPlayer\Commands\CreateMelodyFragment.cs">
+      <Link>References\Commands\CreateMelodyFragment.cs</Link>
     </Compile>
     <Compile Include="..\EmbeddedMelodyPlayer\Commands\PlayMelodyFragment.cs">
       <Link>References\Commands\PlayMelodyFragment.cs</Link>
@@ -77,23 +77,14 @@
     <Compile Include="..\EmbeddedMelodyPlayer\Infrastructure\IFailureDetector.cs">
       <Link>References\Infrastructure\IFailureDetector.cs</Link>
     </Compile>
-    <Compile Include="..\EmbeddedMelodyPlayer\Playing\IMelodyConstructor.cs">
-      <Link>References\Playing\IMelodyConstructor.cs</Link>
-    </Compile>
-    <Compile Include="..\EmbeddedMelodyPlayer\Playing\MelodyCostructorProvider.cs">
-      <Link>References\Playing\MelodyCostructorProvider.cs</Link>
-    </Compile>
     <Compile Include="..\EmbeddedMelodyPlayer\Playing\MelodyElement.cs">
       <Link>References\Playing\MelodyElement.cs</Link>
     </Compile>
+    <Compile Include="..\EmbeddedMelodyPlayer\Playing\MelodyFragmentBuilder.cs">
+      <Link>References\Playing\MelodyFragmentBuilder.cs</Link>
+    </Compile>
     <Compile Include="..\EmbeddedMelodyPlayer\Playing\MelodyFrament.cs">
       <Link>References\Playing\MelodyFrament.cs</Link>
-    </Compile>
-    <Compile Include="..\EmbeddedMelodyPlayer\Playing\MeMelodyConstructor.cs">
-      <Link>References\Playing\MeMelodyConstructor.cs</Link>
-    </Compile>
-    <Compile Include="..\EmbeddedMelodyPlayer\Playing\MidiMelodyConstructor.cs">
-      <Link>References\Playing\MidiMelodyConstructor.cs</Link>
     </Compile>
     <Compile Include="..\EmbeddedMelodyPlayer\Playing\Note.cs">
       <Link>References\Playing\Note.cs</Link>
@@ -107,14 +98,8 @@
     <Compile Include="..\EmbeddedMelodyPlayer\Playing\PlayingMelodyFragmentPipe.cs">
       <Link>References\Playing\PlayingMelodyFragmentPipe.cs</Link>
     </Compile>
-    <Compile Include="..\EmbeddedMelodyPlayer\Reading\IMelodyFileReader.cs">
-      <Link>Reading\IMelodyFileReader.cs</Link>
-    </Compile>
-    <Compile Include="..\EmbeddedMelodyPlayer\Reading\MelodyFileReaderProvider.cs">
-      <Link>Reading\MelodyFileReaderProvider.cs</Link>
-    </Compile>
-    <Compile Include="..\EmbeddedMelodyPlayer\Reading\MeMelodyFileReader.cs">
-      <Link>Reading\MeMelodyFileReader.cs</Link>
+    <Compile Include="..\EmbeddedMelodyPlayer\Reading\MelodyFileReader.cs">
+      <Link>Reading\MelodyFileReader.cs</Link>
     </Compile>
     <Compile Include="..\EmbeddedMelodyPlayer\Utils\BasicAction.cs">
       <Link>References\Utils\BasicAction.cs</Link>

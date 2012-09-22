@@ -7,10 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmbeddedMelodyPlayer.Tests"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "I2C", "I2C\I2C.csproj", "{547B3501-83F4-40BC-9452-C4301EBFD7B1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MidiUtils", "MidiUtils\MidiUtils.csproj", "{58961C81-38CE-4978-93F0-CD9A8174AA8E}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MidiUtils.Tests", "MidiUtils.Tests\MidiUtils.Tests.csproj", "{8DFC94F0-E1A1-464F-B673-B8650D93B3AD}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{4BC7578F-0C53-4C4A-8DF4-9A52172FADA3}"
 	ProjectSection(SolutionItems) = preProject
 		.nuget\packages.config = .nuget\packages.config
@@ -36,14 +32,6 @@ Global
 		{547B3501-83F4-40BC-9452-C4301EBFD7B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{547B3501-83F4-40BC-9452-C4301EBFD7B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{547B3501-83F4-40BC-9452-C4301EBFD7B1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{58961C81-38CE-4978-93F0-CD9A8174AA8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{58961C81-38CE-4978-93F0-CD9A8174AA8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{58961C81-38CE-4978-93F0-CD9A8174AA8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{58961C81-38CE-4978-93F0-CD9A8174AA8E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8DFC94F0-E1A1-464F-B673-B8650D93B3AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8DFC94F0-E1A1-464F-B673-B8650D93B3AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8DFC94F0-E1A1-464F-B673-B8650D93B3AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8DFC94F0-E1A1-464F-B673-B8650D93B3AD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

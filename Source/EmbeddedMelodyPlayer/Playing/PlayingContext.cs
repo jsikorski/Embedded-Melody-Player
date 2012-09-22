@@ -27,10 +27,6 @@ namespace EmbeddedMelodyPlayer.Playing
         public AutoResetEvent PreviousMelodyFragmentPlayedEvent { get; private set; }
         public AutoResetEvent LastMelodyFragmentPlayedEvent { get; private set; }
 
-        #region IFailureDetector Members
-
         public bool FailureDetected { get; set; }
-
-        #endregion
     }
 }

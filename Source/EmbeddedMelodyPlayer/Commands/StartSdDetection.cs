@@ -23,8 +23,6 @@ namespace EmbeddedMelodyPlayer.Commands
             _sdDetectionTimer = new SeparateThreadTimer(DetectSdCard, SdDetectionTimerInterval);
         }
 
-        #region ICommand Members
-
         public void Execute()
         {
             Debug.Print("Starting sd detection...");
@@ -32,8 +30,6 @@ namespace EmbeddedMelodyPlayer.Commands
             BindSdCardEventsHandlers();
             _sdDetectionTimer.Start();
         }
-
-        #endregion
 
         private void DetectSdCard()
         {

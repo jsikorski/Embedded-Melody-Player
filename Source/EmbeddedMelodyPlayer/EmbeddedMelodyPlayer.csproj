@@ -30,7 +30,7 @@
   </PropertyGroup>
   <Import Project="$(NetMfTargetsBaseDir)$(TargetFrameworkVersion)\CSharp.Targets" />
   <ItemGroup>
-    <Compile Include="Commands\ConstructMelodyFragment.cs" />
+    <Compile Include="Commands\CreateMelodyFragment.cs" />
     <Compile Include="Commands\PlayMelodyFragment.cs" />
     <Compile Include="Commands\ReadMelodyFileChunk.cs" />
     <Compile Include="Commands\StartSdDetection.cs" />
@@ -40,21 +40,16 @@
     <Compile Include="Infrastructure\CommandsPipe.cs" />
     <Compile Include="Infrastructure\ICommand.cs" />
     <Compile Include="Infrastructure\IFailureDetector.cs" />
-    <Compile Include="Playing\IMelodyConstructor.cs" />
     <Compile Include="Playing\MelodyFrament.cs" />
-    <Compile Include="Playing\MelodyCostructorProvider.cs" />
     <Compile Include="Playing\MelodyElement.cs" />
-    <Compile Include="Playing\MeMelodyConstructor.cs" />
-    <Compile Include="Playing\MidiMelodyConstructor.cs" />
+    <Compile Include="Playing\MelodyFragmentBuilder.cs" />
     <Compile Include="Playing\Note.cs" />
     <Compile Include="Playing\Pause.cs" />
     <Compile Include="Playing\PlayingContext.cs" />
     <Compile Include="Playing\PlayingMelodyFragmentPipe.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="Reading\IMelodyFileReader.cs" />
-    <Compile Include="Reading\MelodyFileReaderProvider.cs" />
-    <Compile Include="Reading\MeMelodyFileReader.cs" />
+    <Compile Include="Reading\MelodyFileReader.cs" />
     <Compile Include="Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

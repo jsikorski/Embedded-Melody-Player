@@ -9,24 +9,20 @@ namespace EmbeddedMelodyPlayer.Commands
 {
     public class ReadMelodyFileChunk : ICommand
     {
-        private readonly VolumeInfo _sdCardVolume;
         private readonly PlayingContext _playingContext;
-        private readonly MelodyFileReaderProvider _melodyFileReaderProvider;
+        private readonly MelodyFileReader _melodyFileReader;
 
         public ReadMelodyFileChunk(VolumeInfo sdCardVolume, PlayingContext playingContext)
         {
-            _sdCardVolume = sdCardVolume;
             _playingContext = playingContext;
-
-            _melodyFileReaderProvider = new MelodyFileReaderProvider();
+            _melodyFileReader = new MelodyFileReader(sdCardVolume, playingContext);
         }
 
         public void Execute()
         {
             Debug.Print("Reading melody file chunk from SD card...");
 
-            IMelodyFileReader melodyFileReader = _melodyFileReaderProvider.GetMelodyFileReader(_sdCardVolume, _playingContext);
-            _playingContext.MelodyFileChunkData = melodyFileReader.ReadNextFileChunk();
+            _playingContext.MelodyFileChunkData = _melodyFileReader.ReadNextFileChunk();
         }
     }
 }

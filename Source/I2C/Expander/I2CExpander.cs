@@ -4,16 +4,20 @@ namespace I2C.Expander
     {
         private const byte DefaultExpanderAddress = 0x20;
 
+        /// <param name="initialValue">InitialValueForPins</param>
         /// <param name="expanderAddress">Address of the device. Default is 0x20.</param>
-        public I2CExpander(byte expanderAddress = DefaultExpanderAddress) : base(expanderAddress)
+        public I2CExpander(byte initialValue = 0x00, byte expanderAddress = DefaultExpanderAddress) : base(expanderAddress)
         {
+            Write(initialValue);
         }
 
         /// <param name="pinsMode">Modes of the pins. 0 at position n means output mode for n-th pin (and 1 means input mode).</param>
+        /// <param name="initialValue">Initial value for pins.</param>
         /// <param name="expanderAddress">Address of the device. Default is 0x20.</param>
-        public I2CExpander(byte pinsMode, byte expanderAddress = DefaultExpanderAddress) : base(expanderAddress)
+        public I2CExpander(byte pinsMode, byte initialValue = 0x00, byte expanderAddress = DefaultExpanderAddress) : base(expanderAddress)
         {
             SetPinsMode(pinsMode);
+            Write(initialValue);
         }
 
         /// <param name="pinsMode">Modes of the pins. 0 at position n means output mode for n-th pin (and 1 means input mode).</param>
@@ -22,9 +26,10 @@ namespace I2C.Expander
             WriteToRegister((byte)ExpanderRegisters.IODIR, pinsMode);
         }
 
-        public void Write(byte values)
+        /// <param name="value">Value for pins.</param>
+        public void Write(byte value)
         {
-            WriteToRegister((byte)ExpanderRegisters.GPIO, values);
+            WriteToRegister((byte)ExpanderRegisters.GPIO, value);
         }
 
         public byte ReadByte()

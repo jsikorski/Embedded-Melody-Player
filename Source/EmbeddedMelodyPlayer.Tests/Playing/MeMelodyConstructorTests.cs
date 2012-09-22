@@ -15,7 +15,7 @@ namespace EmbeddedMelodyPlayer.Tests.Playing
         {
             byte[] melodyData = File.ReadAllBytes(CorrectFilePath);
 
-            IMelodyConstructor melodyConstructor = new MeMelodyConstructor();
+            var melodyConstructor = new MelodyFragmentBuilder();
             MelodyFrament melody = melodyConstructor.CreateMelodyFragmentFromBytes(melodyData, false, false);
 
             string expected = File.ReadAllText(CorrectFilePath);
@@ -28,7 +28,7 @@ namespace EmbeddedMelodyPlayer.Tests.Playing
         {
             byte[] melodyData = File.ReadAllBytes(IncorrectFilePath);
 
-            IMelodyConstructor melodyConstructor = new MeMelodyConstructor();
+            var melodyConstructor = new MelodyFragmentBuilder();
             Assert.Throws<ArgumentException>(() => melodyConstructor.CreateMelodyFragmentFromBytes(melodyData, false, false));
         }
     }

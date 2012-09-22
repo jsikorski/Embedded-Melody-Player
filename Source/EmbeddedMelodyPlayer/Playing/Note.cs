@@ -37,7 +37,6 @@ namespace EmbeddedMelodyPlayer.Playing
                                                                  {'H', (byte) 0x7f},
                                                              };
 
-
         public Note(char symbol, int duration)
         {
             CheckElementParameters(symbol, duration);

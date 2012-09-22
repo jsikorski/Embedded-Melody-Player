@@ -4,7 +4,7 @@ using Microsoft.SPOT.IO;
 
 namespace EmbeddedMelodyPlayer.Reading
 {
-    public class MeMelodyFileReader : IMelodyFileReader
+    public class MelodyFileReader
     {
         private const string MelodyFileName = "melody.me";
 
@@ -14,7 +14,7 @@ namespace EmbeddedMelodyPlayer.Reading
         private readonly VolumeInfo _sdCardVolume;
         private readonly PlayingContext _playingContext;
 
-        public MeMelodyFileReader(VolumeInfo sdCardVolume, PlayingContext playingContext)
+        public MelodyFileReader(VolumeInfo sdCardVolume, PlayingContext playingContext)
         {
             _sdCardVolume = sdCardVolume;
             _playingContext = playingContext;

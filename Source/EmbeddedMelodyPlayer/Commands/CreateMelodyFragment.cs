@@ -4,28 +4,24 @@ using Microsoft.SPOT;
 
 namespace EmbeddedMelodyPlayer.Commands
 {
-    public class ConstructMelodyFragment : ICommand
+    public class CreateMelodyFragment : ICommand
     {
-        private readonly MelodyCostructorProvider _melodyCostructorProvider;
         private readonly PlayingContext _playingContext;
+        private readonly MelodyFragmentBuilder _melodyFragmentBuilder;
 
-        public ConstructMelodyFragment(PlayingContext playingContext)
+        public CreateMelodyFragment(PlayingContext playingContext)
         {
             _playingContext = playingContext;
-            _melodyCostructorProvider = new MelodyCostructorProvider();
+            _melodyFragmentBuilder = new MelodyFragmentBuilder();
         }
-
-        #region ICommand Members
 
         public void Execute()
         {
             Debug.Print("Constructing melody fragment...");
 
             EnsureFragmentCanBeSafetlyOverwritten();
-            ConstructFragment();
+            CreateFragment();
         }
-
-        #endregion
 
         private void EnsureFragmentCanBeSafetlyOverwritten()
         {
@@ -38,13 +34,11 @@ namespace EmbeddedMelodyPlayer.Commands
             return _playingContext.MelodyFragment == null;
         }
 
-        private void ConstructFragment()
+        private void CreateFragment()
         {
-            IMelodyConstructor melodyConstructor = _melodyCostructorProvider.GetMelodyConstructor();
-
             bool isItFirstFragment = _playingContext.MelodyFragment == null;
             bool isItLastFragment = _playingContext.WasEntireMelodyFileRead;
-            _playingContext.MelodyFragment = melodyConstructor.CreateMelodyFragmentFromBytes(
+            _playingContext.MelodyFragment = _melodyFragmentBuilder.CreateMelodyFragmentFromBytes(
                 _playingContext.MelodyFileChunkData, isItFirstFragment, isItLastFragment);
         }
     }
