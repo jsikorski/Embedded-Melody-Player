@@ -47,6 +47,7 @@
     <Compile Include="Playing\Pause.cs" />
     <Compile Include="Playing\PlayingContext.cs" />
     <Compile Include="Playing\PlayingMelodyFragmentPipe.cs" />
+    <Compile Include="Playing\TempoMultiplierProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Reading\MelodyFileReader.cs" />

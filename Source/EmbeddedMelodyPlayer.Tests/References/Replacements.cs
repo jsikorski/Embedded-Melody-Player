@@ -120,6 +120,27 @@ namespace GHIElectronics.NETMF.Hardware
         {
         }
     }
+
+    internal class AnalogIn
+    {
+        public enum Pin
+        {
+            Ain0
+        }
+
+        public AnalogIn(Pin pin)
+        {
+        }
+
+        public void SetLinearScale(int min, int max)
+        {
+        }
+
+        public int Read()
+        {
+            return 0;
+        }
+    }
 }
 
 namespace GHIElectronics.NETMF.FEZ

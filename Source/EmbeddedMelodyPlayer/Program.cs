@@ -1,9 +1,5 @@
 ﻿using System.Threading;
 using EmbeddedMelodyPlayer.Core;
-using EmbeddedMelodyPlayer.Infrastructure;
-using GHIElectronics.NETMF.FEZ;
-using GHIElectronics.NETMF.Hardware;
-using I2C.Expander;
 using Microsoft.SPOT;
 
 namespace EmbeddedMelodyPlayer

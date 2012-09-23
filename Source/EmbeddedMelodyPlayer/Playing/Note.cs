@@ -9,7 +9,6 @@ namespace EmbeddedMelodyPlayer.Playing
     public class Note : MelodyElement
     {
         private const int BuzzerPwmDutyCycle = 50;
-        private const int TempoMultiplier = 100;
 
         private static readonly PWM BuzzerPwm = new PWM((PWM.Pin)FEZ_Pin.PWM.Di5);
 
@@ -52,7 +51,7 @@ namespace EmbeddedMelodyPlayer.Playing
             BuzzerPwm.Set(frequency, BuzzerPwmDutyCycle);
             TurnNoteLedsOn();
 
-            Thread.Sleep(Duration * TempoMultiplier);
+            Thread.Sleep(Duration * TempoMultiplierProvider.GetMultiplier());
 
             TurnAllNoteLedsOff();
             BuzzerPwm.Set(false);
