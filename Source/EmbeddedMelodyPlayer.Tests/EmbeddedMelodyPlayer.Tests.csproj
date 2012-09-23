@@ -62,6 +62,9 @@
     <Compile Include="..\EmbeddedMelodyPlayer\Commands\StartSdDetection.cs">
       <Link>References\Commands\StartSdDetection.cs</Link>
     </Compile>
+    <Compile Include="..\EmbeddedMelodyPlayer\Core\ProgramContext.cs">
+      <Link>References\Core\ProgramContext.cs</Link>
+    </Compile>
     <Compile Include="..\EmbeddedMelodyPlayer\Infrastructure\BusyScope.cs">
       <Link>References\Infrastructure\BusyScope.cs</Link>
     </Compile>
@@ -134,9 +137,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="References\Core\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
