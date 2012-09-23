@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading;
 using GHIElectronics.NETMF.FEZ;
 using GHIElectronics.NETMF.Hardware;
 using Microsoft.SPOT;
@@ -7,10 +6,10 @@ using Microsoft.SPOT.Hardware;
 
 namespace EmbeddedMelodyPlayer.Playing
 {
-    public static class TempoMultiplierProvider
+    public static class MelodyElementDurationResolver
     {
         private static int _multiplierBase = 250;
-        private const int MultiplierFactor = 2;
+        private const int PhotoresistorFactor = 2;
 
         private static readonly AnalogIn AnalogIn = new AnalogIn(AnalogIn.Pin.Ain0);
         
@@ -22,7 +21,7 @@ namespace EmbeddedMelodyPlayer.Playing
         private static DateTime _lastTempoUpEventTime;
         private static DateTime _lastTempoDownEventTime;
 
-        static TempoMultiplierProvider()
+        static MelodyElementDurationResolver()
         {
             AnalogIn.SetLinearScale(0, 100);
             _lastTempoUpEventTime = DateTime.Now;
@@ -33,12 +32,16 @@ namespace EmbeddedMelodyPlayer.Playing
 
         private static void OnTempoUpButtonPress(uint data1, uint data2, DateTime time)
         {
-            if (time -_lastTempoUpEventTime < new TimeSpan(0, 0, 0, 0, 500))
+            if (time - _lastTempoUpEventTime < new TimeSpan(0, 0, 0, 0, 500))
                 return;
 
-            Debug.Print("Melody tempo increased. Actual multiplier base value is " + _multiplierBase + ".");
-            _multiplierBase -= 10;
             _lastTempoUpEventTime = time;
+
+            if (_multiplierBase <= 200)
+                return;
+
+            _multiplierBase -= 25;
+            Debug.Print("Melody tempo increased. Actual multiplier base value is " + _multiplierBase + ".");
         }
 
         private static void OnTempoDownButtonPress(uint data1, uint data2, DateTime time)
@@ -46,14 +49,15 @@ namespace EmbeddedMelodyPlayer.Playing
             if (time - _lastTempoDownEventTime < new TimeSpan(0, 0, 0, 0, 500))
                 return;
 
-            Debug.Print("Melody tempo decreased. Actual multiplier base value is " + _multiplierBase + ".");
-            _multiplierBase += 10;
             _lastTempoDownEventTime = time;
+
+            _multiplierBase += 25;
+            Debug.Print("Melody tempo decreased. Actual multiplier base value is " + _multiplierBase + ".");
         }
 
-        public static int GetMultiplier()
+        public static int GetElementDuration(MelodyElement melodyElement)
         {
-            return _multiplierBase - MultiplierFactor * AnalogIn.Read();
+            return melodyElement.Duration * (_multiplierBase - PhotoresistorFactor * AnalogIn.Read());
         }
     }
 }

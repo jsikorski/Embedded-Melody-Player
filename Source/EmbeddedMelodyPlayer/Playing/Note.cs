@@ -51,7 +51,7 @@ namespace EmbeddedMelodyPlayer.Playing
             BuzzerPwm.Set(frequency, BuzzerPwmDutyCycle);
             TurnNoteLedsOn();
 
-            Thread.Sleep(Duration * TempoMultiplierProvider.GetMultiplier());
+            Thread.Sleep(MelodyElementDurationResolver.GetElementDuration(this));
 
             TurnAllNoteLedsOff();
             BuzzerPwm.Set(false);

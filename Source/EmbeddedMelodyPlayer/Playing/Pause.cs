@@ -14,7 +14,7 @@ namespace EmbeddedMelodyPlayer.Playing
 
         public override void Play()
         {
-            Thread.Sleep(Duration*250);
+            Thread.Sleep(MelodyElementDurationResolver.GetElementDuration(this));
         }
     }
 }
