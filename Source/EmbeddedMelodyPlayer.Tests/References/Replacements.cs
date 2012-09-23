@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 
+internal delegate void NativeEventHandler(uint data1, uint data2, DateTime time);
+
 namespace VikingErik.NetMF.MicroLinq
 {
     internal static class LinqExtensions
@@ -52,11 +54,23 @@ namespace Microsoft.SPOT.IO
 
 namespace Microsoft.SPOT.Hardware
 {
+    internal class Port
+    {
+        public enum ResistorMode
+        {
+            PullUp
+        }
+
+        public enum InterruptMode
+        {
+            InterruptEdgeLow
+        }
+    }
+
     internal class Cpu
     {
         internal enum Pin
         {
-
         }
     }
 
@@ -67,6 +81,19 @@ namespace Microsoft.SPOT.Hardware
         }
 
         internal void Write(bool state)
+        {
+        }
+    }
+
+    internal class InterruptPort
+    {
+        public NativeEventHandler OnInterrupt;
+        
+        public InterruptPort(Cpu.Pin portId, bool glitchFilter, Port.ResistorMode resistorMode, Port.InterruptMode interruptMode)
+        {
+        }
+
+        public void ClearInterrupt()
         {
         }
     }
@@ -152,7 +179,7 @@ namespace GHIElectronics.NETMF.FEZ
             Di5,
             Di8,
             Di9,
-            Di10
+            Di10,
         }
 
         internal enum Digital
@@ -165,6 +192,8 @@ namespace GHIElectronics.NETMF.FEZ
             Di5,
             Di6,
             Di7,
+            Di11,
+            Di12
         }
     }
 }

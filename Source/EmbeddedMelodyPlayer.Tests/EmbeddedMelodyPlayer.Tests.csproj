@@ -99,7 +99,7 @@
       <Link>References\Playing\PlayingMelodyFragmentPipe.cs</Link>
     </Compile>
     <Compile Include="..\EmbeddedMelodyPlayer\Playing\TempoMultiplierProvider.cs">
-      <Link>Playing\TempoMultiplierProvider.cs</Link>
+      <Link>References\Playing\TempoMultiplierProvider.cs</Link>
     </Compile>
     <Compile Include="..\EmbeddedMelodyPlayer\Reading\MelodyFileReader.cs">
       <Link>Reading\MelodyFileReader.cs</Link>

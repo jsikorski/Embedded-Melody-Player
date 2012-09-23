@@ -1,6 +1,8 @@
+using System;
 using EmbeddedMelodyPlayer.Commands;
 using EmbeddedMelodyPlayer.Infrastructure;
 using EmbeddedMelodyPlayer.Playing;
+using EmbeddedMelodyPlayer.Utils;
 using Microsoft.SPOT;
 using Microsoft.SPOT.IO;
 
