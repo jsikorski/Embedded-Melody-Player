@@ -34,6 +34,7 @@
     <Compile Include="Commands\PlayMelodyFragment.cs" />
     <Compile Include="Commands\ReadMelodyFileChunk.cs" />
     <Compile Include="Commands\StartSdDetection.cs" />
+    <Compile Include="Core\ProgramContext.cs" />
     <Compile Include="Core\ProgramController.cs" />
     <Compile Include="Infrastructure\BusyScope.cs" />
     <Compile Include="Infrastructure\CommandsInvoker.cs" />
