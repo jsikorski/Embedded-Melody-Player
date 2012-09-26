@@ -44,7 +44,10 @@ namespace EmbeddedMelodyPlayer.Core
                 CommandsInvoker.Execute(playingFragmentPipe, () => playingContext.FailureDetected = true);
 
                 if (playingContext.FailureDetected)
+                {
+                    playingContext.PreviousMelodyFragmentPlayedEvent.WaitOne();
                     return;
+                }
             }
 
             playingContext.LastMelodyFragmentPlayedEvent.WaitOne();
